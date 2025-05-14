@@ -42,7 +42,7 @@ export default function Home() {
             </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {days.map((day) => (
             <div key={day} className="bg-white rounded-2xl shadow-lg p-5 flex flex-col">
                 <h2 className="text-2xl font-semibold text-center text-pink-300 mb-4">{day}</h2>
