@@ -3,6 +3,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div>
+      {/* header section */}
       <div className="relative w-full h-[150px] bg-[#F4E2CE] overflow-hidden shadow-lg shadow-[#00000033]">
         {/* Bottom Left Bowl */}
         <Image
@@ -40,7 +41,8 @@ export default function Home() {
         </div>
       </div>
 
-
+      {/* recipes section */}
+      <h1>hello</h1>
     </div>
   );
 }
