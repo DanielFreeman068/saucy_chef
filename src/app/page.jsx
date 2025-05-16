@@ -23,7 +23,7 @@ export default function Home() {
         />
 
         <div className="relative z-10 flex items-center flex-col sm:flex-row justify-evenly align-center h-full w-full shadow-lg">
-          <div className="flex justify-evenly items-center gap-5 md:gap-10 lg:gap-25 xl:gap-40">
+          <div className="flex justify-evenly items-center gap-5 sm:gap-10 md:gap-20 lg:gap-32 xl:gap-48">
             <Image
               src="/saucy_chef_logo2.png"
               alt="Saucy Chef Logo"
