@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div>
-      <div className="relative w-full h-[250px] md:h-[300px] bg-header overflow-hidden shadow-lg shadow-[#00000033]">
+      <div className="relative w-full h-[250px] md:h-[300px] bg-[#F4E2CE] overflow-hidden shadow-lg shadow-[#00000033]">
         {/* Bottom Left Bowl */}
         <Image
           src="/curry.png"
@@ -30,7 +30,7 @@ export default function Home() {
             height={100}
             className="w-[50px] md:w-[80px] lg:w-[100px]"
           />
-          <h1 className="text-textPrimary">Explore Recipes</h1>
+          <h1 className="text-[#953306] text-4xl">Explore Recipes</h1>
           <h1>Freeman</h1>
         </div>
       </div>
