@@ -292,7 +292,7 @@ const CreationPage = () => {
                                 value={item.ingredient}
                                 onChange={(e) => handleIngredientChange(index, 'ingredient', e.target.value)}
                                 placeholder="Ingredient"
-                                className=" placeholder-[#953306ad] w-full p-2 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
+                                className=" placeholder-[#953306ad] w-full ml-1 p-2 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
                             />
                             </div>
                             

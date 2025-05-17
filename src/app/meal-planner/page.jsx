@@ -34,6 +34,7 @@ export default function Home() {
         const key = `${day}-${meal}`;
         const updated = { ...selectedRecipes };
         delete updated[key];
+        alert(`Deleted meal plan for ${meal} on ${day}`)
         setSelectedRecipes(updated);
         localStorage.setItem('mealPlan', JSON.stringify(updated));
     };
@@ -97,7 +98,36 @@ export default function Home() {
                         return (
                         <div key={meal} className="bg-white w-full h-[160px] rounded-xl p-4">
                             <div className="flex justify-center align-center h-full items-center">
-                                <div className="flex flex-col gap-6 text-center">
+                                <div className="flex flex-col gap-4 text-center">
+                                    {!recipe && 
+                                        (meal === "Breakfast" ? (
+                                        <Image
+                                            src="/mealIcons/breakfast.png"
+                                            alt="Breakfast"
+                                            width={34}
+                                            height={34}
+                                            className='mx-auto'
+                                        />
+                                        ) : meal === "Lunch" ? (
+                                        <Image
+                                            src="/mealIcons/lunch.png"
+                                            alt="Lunch"
+                                            width={34}
+                                            height={34}
+                                            className='mx-auto'
+                                        />
+                                        ) : meal === "Dinner" ? (
+                                        <Image
+                                            src="/mealIcons/dinner.png"
+                                            alt="Dinner"
+                                            width={34}
+                                            height={34}
+                                            className='mx-auto'
+                                        />
+                                        ) : (
+                                        <p>Invalid meal type</p>
+                                        ))
+                                    }
                                     <span className="font-medium text-[#953306]">{meal}</span>
                                     <div className="flex items-center gap-2 mx-auto">
                                         {recipe && (
@@ -116,8 +146,10 @@ export default function Home() {
                                         <h1 className='text-md'>Add Meal</h1>
                                         </Link>
                                     </div>
+                                    {recipe && (
+                                        <h1 className="text-sm text-gray-700">{recipe.Name}</h1>
+                                    )}
                                 </div>
-
                             </div>
                         </div>
                         );
