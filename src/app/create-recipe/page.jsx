@@ -10,6 +10,7 @@ import { ChevronLeft, Plus, Trash2, Save, Camera } from 'lucide-react';
 
 const CreationPage = () => {
     const router = useRouter();
+    const [showSuccess, setShowSuccess] = useState(false);
     
         useEffect(() => {
             const token = localStorage.getItem('token');
@@ -104,7 +105,11 @@ const CreationPage = () => {
 
                 const result = await response.json();
                 if (response.ok) {
-                    alert('Recipe saved successfully!');
+                    setShowSuccess(true);
+                    setTimeout(() => {
+                        setShowSuccess(false);
+                        router.push('/explore');
+                    }, 2000);
                 } else {
                     alert(`Error: ${result.message}`);
                 }
@@ -117,7 +122,17 @@ const CreationPage = () => {
 
     return (
         <>
+        {showSuccess && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000b4]">
+                <div className="bg-[#abd6a7] text-white px-8 py-6 rounded-lg shadow-xl text-center animate-fadeIn max-w-sm w-full">
+                    <div className="text-4xl mb-2">😊</div>
+                    <h2 className="text-lg font-semibold mb-1">Recipe saved successfully!</h2>
+                    <p className="text-sm text-white/80">Redirecting you to explore...</p>
+                    </div>
+                </div>
+                )}
         <div className="bg-[#D96F63] min-h-screen px-20 py-6 font-sans">
+            
             <div className="max-w-8xl mx-auto bg-[#DFBC94] rounded-lg shadow-lg p-8">
                 <header className="flex items-center justify-between mb-8 border-b-2 border-amber-800 pb-4">
                 <div className="flex items-center ">
