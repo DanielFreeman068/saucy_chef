@@ -20,7 +20,6 @@ app.use(express.urlencoded({extended : false}));
 //Routes
 app.use('/api/login', require('./routes/userRoutes'));
 app.use('/api/signup', require('./routes/userRoutes'));
-app.use('/api/create-recipe', require('./routes/recipeRoutes'))
 
 
 

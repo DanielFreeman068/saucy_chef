@@ -10,7 +10,6 @@ import { ChevronLeft, Plus, Trash2, Save, Camera } from 'lucide-react';
 
 const CreationPage = () => {
     const router = useRouter();
-    const [showSuccess, setShowSuccess] = useState(false);
     
         useEffect(() => {
             const token = localStorage.getItem('token');
@@ -22,14 +21,14 @@ const CreationPage = () => {
         }, []);
 
         const [recipe, setRecipe] = useState({
-            Name: '',
-            Category: '',
-            Area: '',
-            Instructions: '',
-            Image: '',
-            Youtube: '',
+            strMeal: '',
+            strCategory: '',
+            strArea: '',
+            strInstructions: '',
+            strMealThumb: '',
+            strYoutube: '',
             ingredients: [{ ingredient: '', measure: '' }]
-            });
+        });
 
         // Handle text input changes
         const handleChange = (e) => {
@@ -69,70 +68,46 @@ const CreationPage = () => {
         };
 
         // Handle form submission
-        const handleSubmit = async () => {
+        const handleSubmit = () => {
             // Transform the recipe data back to the API structure format
             const formattedRecipe = {
             idMeal: Math.floor(Math.random() * 100000).toString(),
-            Name: recipe.Name,
-            Category: recipe.Category,
-            Area: recipe.Area,
-            Instructions: recipe.Instructions,
-            Image: recipe.Image || '/api/placeholder/400/320',
-            Youtube: recipe.Youtube,
+            strMeal: recipe.strMeal,
+            strMealAlternate: null,
+            strCategory: recipe.strCategory,
+            strArea: recipe.strArea,
+            strInstructions: recipe.strInstructions,
+            strMealThumb: recipe.strMealThumb || '/api/placeholder/400/320',
+            strTags: null,
+            strYoutube: recipe.strYoutube,
+            dateModified: null,
+            strSource: null,
+            strImageSource: null,
+            strCreativeCommonsConfirmed: null
             };
 
             // Add ingredient and measure properties
             recipe.ingredients.forEach((item, index) => {
             const ingredientNum = index + 1;
-            formattedRecipe[`Ingredient${ingredientNum}`] = item.ingredient;
-            formattedRecipe[`Measure${ingredientNum}`] = item.measure;
+            formattedRecipe[`strIngredient${ingredientNum}`] = item.ingredient;
+            formattedRecipe[`strMeasure${ingredientNum}`] = item.measure;
             });
 
             // Fill remaining ingredient slots with empty strings (up to 20)
             for (let i = recipe.ingredients.length + 1; i <= 20; i++) {
-            formattedRecipe[`Ingredient${i}`] = '';
-            formattedRecipe[`Measure${i}`] = '';
+            formattedRecipe[`strIngredient${i}`] = '';
+            formattedRecipe[`strMeasure${i}`] = '';
             }
 
-            try {
-                const response = await fetch('http://localhost:4000/api/create-recipe', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formattedRecipe),
-                });
-
-                const result = await response.json();
-                if (response.ok) {
-                    setShowSuccess(true);
-                    setTimeout(() => {
-                        setShowSuccess(false);
-                        router.push('/explore');
-                    }, 2000);
-                } else {
-                    alert(`Error: ${result.message}`);
-                }
-            } catch (error) {
-                console.error('Error submitting recipe:', error);
-                alert('An error occurred while saving the recipe.');
-            }
+            console.log('Submitting recipe:', formattedRecipe);
+            // Here you would typically send the data to your API
+            alert('Recipe saved successfully!');
         };
 
 
     return (
         <>
-        {showSuccess && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000b4]">
-                <div className="bg-[#abd6a7] text-white px-8 py-6 rounded-lg shadow-xl text-center animate-fadeIn max-w-sm w-full">
-                    <div className="text-4xl mb-2">😊</div>
-                    <h2 className="text-lg font-semibold mb-1">Recipe saved successfully!</h2>
-                    <p className="text-sm text-white/80">Redirecting you to explore...</p>
-                    </div>
-                </div>
-                )}
         <div className="bg-[#D96F63] min-h-screen px-20 py-6 font-sans">
-            
             <div className="max-w-8xl mx-auto bg-[#DFBC94] rounded-lg shadow-lg p-8">
                 <header className="flex items-center justify-between mb-8 border-b-2 border-amber-800 pb-4">
                 <div className="flex items-center ">
@@ -161,12 +136,12 @@ const CreationPage = () => {
                     <h2 className="text-xl font-medium text-amber-800 mb-4 border-b-2 border-[#DFBC94] pb-2">Recipe Details</h2>
                     <div className="space-y-4">
                         <div>
-                        <label htmlFor="Name" className="block text-amber-800 font-medium mb-1">Recipe Name</label>
+                        <label htmlFor="strMeal" className="block text-amber-800 font-medium mb-1">Recipe Name</label>
                         <input
                             type="text"
-                            id="Name"
-                            name="Name"
-                            value={recipe.Name}
+                            id="strMeal"
+                            name="strMeal"
+                            value={recipe.strMeal}
                             onChange={handleChange}
                             className="w-full p-3  border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
                         />
@@ -174,11 +149,11 @@ const CreationPage = () => {
                         
                         <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label htmlFor="Category" className="block text-amber-800 font-medium mb-1">Category</label>
+                            <label htmlFor="strCategory" className="block text-amber-800 font-medium mb-1">Category</label>
                             <select
-                            id="Category"
-                            name="Category"
-                            value={recipe.Category}
+                            id="strCategory"
+                            name="strCategory"
+                            value={recipe.strCategory}
                             onChange={handleChange}
                             className="text-[#953306ad] w-full p-3 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
                             >
@@ -192,11 +167,11 @@ const CreationPage = () => {
                         </div>
                         
                         <div>
-                            <label htmlFor="Area" className="block text-[#953306] font-medium mb-1">Cuisine</label>
+                            <label htmlFor="strArea" className="block text-[#953306] font-medium mb-1">Cuisine</label>
                             <select
-                            id="Area"
-                            name="Area"
-                            value={recipe.Area}
+                            id="strArea"
+                            name="strArea"
+                            value={recipe.strArea}
                             onChange={handleChange}
                             className=" text-[#953306ad] w-full p-3 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
                             >
@@ -230,12 +205,12 @@ const CreationPage = () => {
                         </div>
                         
                         <div>
-                        <label htmlFor="Youtube" className="block text-amber-800 font-medium mb-1">YouTube Video URL</label>
+                        <label htmlFor="strYoutube" className="block text-amber-800 font-medium mb-1">YouTube Video URL</label>
                         <input
                             type="text"
-                            id="Youtube"
-                            name="Youtube"
-                            value={recipe.Youtube}
+                            id="strYoutube"
+                            name="strYoutube"
+                            value={recipe.strYoutube}
                             onChange={handleChange}
                             placeholder="https://www.youtube.com/watch?v=..."
                             className=" placeholder-[#953306ad] w-full p-3 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
@@ -248,9 +223,9 @@ const CreationPage = () => {
                     <div className="bg-[#F4E2CE] rounded-lg p-6 shadow-sm border-2 border-[#DFBC94]">
                     <h2 className="text-xl font-medium text-amber-800 mb-4 border-b-2 border-[#DFBC94] pb-2">Cooking Instructions</h2>
                     <textarea
-                        id="Instructions"
-                        name="Instructions"
-                        value={recipe.Instructions}
+                        id="strInstructions"
+                        name="strInstructions"
+                        value={recipe.strInstructions}
                         onChange={handleChange}
                         rows="8"
                         className=" placeholder-[#953306ad] w-full p-3 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
@@ -266,9 +241,9 @@ const CreationPage = () => {
                     <h2 className="text-xl font-medium text-amber-800 mb-4 border-b-2 border-[#DFBC94] pb-2">Recipe Image</h2>
                     <div className="flex flex-col items-center">
                         <div className="w-full h-64 bg-[#E38B82] rounded-md flex items-center justify-center mb-4">
-                        {recipe. Image ? (
+                        {recipe.strMealThumb ? (
                             <img 
-                            src={recipe.Image} 
+                            src={recipe.strMealThumb} 
                             alt="Recipe thumbnail" 
                             className="w-full h-full object-cover rounded-md"
                             />
@@ -276,11 +251,17 @@ const CreationPage = () => {
                             <Camera size={64} className="text-[#af554b] " />
                         )}
                         </div>
+                        <button
+                        type="button"
+                        className="px-4 py-2 bg-[#B53325] text-white rounded-md hover:bg-[#912b20] transition-colors w-full mb-3"
+                        >
+                        Upload Image
+                        </button>
                         <input
                         type="text"
-                        id="Image"
-                        name="Image"
-                        value={recipe.Image}
+                        id="strMealThumb"
+                        name="strMealThumb"
+                        value={recipe.strMealThumb}
                         onChange={handleChange}
                         placeholder="Or enter image URL"
                         className=" placeholder-[#953306ad] w-full p-2 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325] text-sm"
