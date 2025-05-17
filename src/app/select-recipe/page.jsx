@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 
 const recipes = [
