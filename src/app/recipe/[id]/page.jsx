@@ -1,8 +1,9 @@
 import React from 'react'
 import meals from '../../../../backend/data/recipes.json';
 
-export default function RecipeDisplay({ params }) {
-    const meal = meals.find((dish) => dish.idMeal === params.id);
+export default async function RecipeDisplay({ params }) {
+    const { id } = await params
+    const meal = meals.find((dish) => dish.idMeal === id);
 
     if (!meal) {
         return <p>Meal not found</p>;
