@@ -3,8 +3,21 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+    const router = useRouter();
+
+    //Checking for JWT Token
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+        router.push('/'); // no token = redirect
+        return;
+        }
+    }, []);
+
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const meals = ['Breakfast', 'Lunch', 'Dinner'];
 
@@ -64,8 +77,8 @@ export default function Home() {
                     <h1 className="text-[#953306] text-xl sm:text-2xl md:text-3xl lg:text-4xl">Weekly Meal Planner</h1>
                     </div>
                     <div className="flex flex-row gap-6">
-                    <a href="/" className="text-gray-900 bg-white rounded-lg px-3 md:px-5 md:py-3 text-nowrap py-2 shadow-lg hover:bg-gray-200 text-sm text-center">Create</a>
-                    <a href="/meal-planner" className="text-gray-900 bg-white rounded-lg px-3 md:px-5 md:py-3 text-nowrap py-2 shadow-lg hover:bg-gray-200 text-sm text-center">Explore Recipes</a>
+                    <a href="/create-recipe" className="text-gray-900 bg-white rounded-lg px-3 md:px-5 md:py-3 text-nowrap py-2 shadow-lg hover:bg-gray-200 text-sm text-center">Create</a>
+                    <a href="/explore" className="text-gray-900 bg-white rounded-lg px-3 md:px-5 md:py-3 text-nowrap py-2 shadow-lg hover:bg-gray-200 text-sm text-center">Explore Recipes</a>
                     </div>
                 </div>
             </div>
