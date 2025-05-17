@@ -1,7 +1,7 @@
 'use client'
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import Link from 'next/link';
+
 import Image from 'next/image';
 import { useCallback, useEffect } from 'react';
 import meals from '../../../backend/data/recipes.json';

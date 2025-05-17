@@ -63,15 +63,15 @@ const ExplorePage = () => {
         {/* recipes section */}
             <div className="flex flex-wrap justify-center gap-20 mt-24 px-4 ">
                 {meals.map((meal) => (
-                    <Link  key={meal.idMeal} href={`/recipe/${meal.idMeal}`}>
+                    
                     <DishCard 
                     key={meal.idMeal}
+                    id={meal.idMeal}
                     name={meal.Name}
                     location={meal.Area}
                     image={meal.Image}
                     category={meal.Category}
                     />
-                    </Link>
                 ))}
             </div>
         </div>
