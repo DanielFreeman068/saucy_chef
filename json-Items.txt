@@ -1,0 +1,99 @@
+{
+------------------------------------------------------------------------------------------------------------------------------------
+
+    This is the id of the meal that will be stored in the users favorited list
+
+    "idMeal":"52860",  
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+    this is the name of the dish
+
+    "Name":"Chocolate Raspberry Brownies",
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+    this is the category of the dish that will be used to filter
+
+    "Category":"Dessert",
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+    this is the location or origin of the dish
+
+    "Area":"American",
+
+------------------------------------------------------------------------------------------------------------------------------------
+ 
+    These are the instructions of how to cook the dish
+
+    "Instructions":"Heat oven to 180C\/160C fan\/gas 4. Line a 20 x 30cm baking tray tin with baking parchment. Put the chocolate, butter and sugar in a pan and gently melt, stirring occasionally with a wooden spoon. Remove from the heat.\r\nStir the eggs, one by one, into the melted chocolate mixture. Sieve over the flour and cocoa, and stir in. Stir in half the raspberries, scrape into the tray, then scatter over the remaining raspberries. Bake on the middle shelf for 30 mins or, if you prefer a firmer texture, for 5 mins more. Cool before slicing into squares. Store in an airtight container for up to 3 days.",
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+    This is the image that can be used to see how the dish will/ should look like
+
+    "Image":"https:\/\/www.themealdb.com\/images\/media\/meals\/yypvst1511386427.jpg",
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+    These are the tags that can be used to describe the dish
+
+    "Tags":"Chocolate,Desert,Snack",
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+    THis is a youtube link i belive on how to create the dish like instructions or an example
+
+    "Youtube":"https:\/\/www.youtube.com\/watch?v=Pi89PqsAaAg",
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+    These are the ingredients needed to cook the dish
+
+    "Ingredient1":"Dark Chocolate",
+    "Ingredient2":"Milk Chocolate",
+    "Ingredient3":"Salted Butter",
+    "Ingredient4":"Light Brown Soft Sugar",
+    "Ingredient5":"Eggs",
+    "Ingredient6":"Plain Flour",
+    "Ingredient7":"Cocoa",
+    "Ingredient8":"Raspberries",
+    "Ingredient9":"",
+    "Ingredient10":"",
+    "Ingredient11":"",
+    "Ingredient12":"",
+    "Ingredient13":"",
+    "Ingredient14":"",
+    "Ingredient15":"",
+    "Ingredient16":"",
+    "Ingredient17":"",
+    "Ingredient18":"",
+    "Ingredient19":"",
+    "Ingredient20":"",
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+    These are the Measurements that line up with the ingredients
+
+    "Measure1":"200g",
+    "Measure2":"100g ",
+    "Measure3":"250g",
+    "Measure4":"400g",
+    "Measure5":"4 large",
+    "Measure6":"140g",
+    "Measure7":"50g",
+    "Measure8":"200g",
+    "Measure9":"",
+    "Measure10":"",
+    "Measure11":"",
+    "Measure12":"",
+    "Measure13":"",
+    "Measure14":"",
+    "Measure15":"",
+    "Measure16":"",
+    "Measure17":"",
+    "Measure18":"",
+    "Measure19":"",
+    "Measure20":""
+    },
