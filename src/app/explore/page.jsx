@@ -1,9 +1,10 @@
 'use client'
 import Image from "next/image";
 import DishCard from "../components/DishCard.jsx"
-import meals from '../recipes.json';
+import meals from '../../../backend/data/recipes.json';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import Link from 'next/link'
 
 
 const ExplorePage = () => {
@@ -60,15 +61,17 @@ const ExplorePage = () => {
             </div>
         </div>
         {/* recipes section */}
-            <div className="flex flex-wrap justify-center gap-20 mt-24 px-4">
+            <div className="flex flex-wrap justify-center gap-20 mt-24 px-4 ">
                 {meals.map((meal) => (
-                    <DishCard
+                    <Link  key={meal.idMeal} href={`/recipe/${meal.idMeal}`}>
+                    <DishCard 
                     key={meal.idMeal}
                     name={meal.Name}
                     location={meal.Area}
                     image={meal.Image}
                     category={meal.Category}
                     />
+                    </Link>
                 ))}
             </div>
         </div>

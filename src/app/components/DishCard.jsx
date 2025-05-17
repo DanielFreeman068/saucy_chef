@@ -3,7 +3,7 @@ import { CiStar } from "react-icons/ci";
 
     const DishCard = ({ name, image, location, category }) => {
     return (
-        <div className="w-72 p-6 rounded-sm flex flex-col justify-between my-10" style={{ backgroundColor: '#f5e2ce' }}>
+        <div className="w-72 p-6 rounded-sm flex flex-col justify-between my-10 hover:cursor-pointer transform transition-transform duration-200 hover:scale-105" style={{ backgroundColor: '#f5e2ce' }}>
         {/* Image container with yellow border */}
         <div className="relative my-4">
             <div className="w-full h-64 -mt-28 overflow-hidden rounded-sm" style={{ borderColor: '#e5a657', borderWidth: '4px' }}>

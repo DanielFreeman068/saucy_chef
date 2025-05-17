@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
         </main>
 
         {/* footer section */}
-        <footer className="bg-[#B53325] text-white w-full px-6 py-8">
+        <footer className="bg-[#B53325] text-white w-full px-6 py-6">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-6">
             {/* Left side: Legal + Copyright in a row */}
             <div className="flex flex-col md:flex-row md:items-center gap-3 text-center md:text-left">

@@ -4,7 +4,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCallback, useEffect } from 'react';
-import meals from '../recipes.json';
+import meals from '../../../backend/data/recipes.json';
 import DishCard from "../components/DishCard.jsx"
 
     export default function SelectRecipe() {

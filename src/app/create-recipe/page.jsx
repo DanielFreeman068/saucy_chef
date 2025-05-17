@@ -251,12 +251,6 @@ const CreationPage = () => {
                             <Camera size={64} className="text-[#af554b] " />
                         )}
                         </div>
-                        <button
-                        type="button"
-                        className="px-4 py-2 bg-[#B53325] text-white rounded-md hover:bg-[#912b20] transition-colors w-full mb-3"
-                        >
-                        Upload Image
-                        </button>
                         <input
                         type="text"
                         id="strMealThumb"
