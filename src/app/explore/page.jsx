@@ -60,7 +60,7 @@ const ExplorePage = () => {
             </div>
         </div>
         {/* recipes section */}
-            <div className="flex flex-wrap justify-center gap-20 mt-24">
+            <div className="flex flex-wrap justify-center gap-20 mt-24 px-4">
                     {meals.map((meal) => (
                 <DishCard
                 key={meal.idMeal}
