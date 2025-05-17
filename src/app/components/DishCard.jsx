@@ -23,8 +23,8 @@ import { CiStar } from "react-icons/ci";
 
         {/* Title section */}
         <div className="mb-8">
-            <h3 className="text-lg font-medium text-amber-900 mb-2">{name || "Title of Dish"}</h3>
-            <p className="text-sm text-amber-700">{category || "Category"}</p>
+            <h3 className="text-xl font-medium text-amber-900 mb-2">{name || "Title of Dish"}</h3>
+            <p className="text-md text-amber-700">{category || "Category"}</p>
         </div>
 
         {/* Footer section with star and location */}
@@ -32,7 +32,7 @@ import { CiStar } from "react-icons/ci";
             <div className="flex items-center">
             <span className="text-3xl text-amber-700"><CiStar /></span>
             </div>
-            <div className="text-sm text-amber-700">
+            <div className="text-lg text-amber-700">
             {location || "Area"}
             </div>
         </div>

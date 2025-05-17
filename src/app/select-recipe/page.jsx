@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useCallback } from 'react';
 
+
 const recipes = [
     'Avocado Toast',
     'Chicken Salad',
@@ -15,8 +16,19 @@ const recipes = [
     ];
 
     export default function SelectRecipe() {
+
     const searchParams = useSearchParams();
     const router = useRouter();
+
+       //Checking for JWT Token
+            useEffect(() => {
+                const token = localStorage.getItem('token');
+        
+                if (!token) {
+                router.push('/'); // no token = redirect
+                return;
+                }
+            }, []);
 
     const day = searchParams.get('day');
     const meal = searchParams.get('meal');

@@ -18,6 +18,7 @@ const ExplorePage = () => {
         }
     }, []);
 
+
     return (
         <>
         <div>
@@ -53,12 +54,11 @@ const ExplorePage = () => {
                 <h1 className="text-[#953306] text-xl sm:text-2xl md:text-3xl lg:text-4xl">Explore Recipes</h1>
             </div>
             <div className="flex flex-row gap-6">
-                <a href="/" className="text-gray-900 bg-white rounded-lg px-3 md:px-5 md:py-3 text-nowrap py-2 shadow-lg hover:bg-gray-200 text-sm text-center">Create</a>
+                <a href="/create-recipe" className="text-gray-900 bg-white rounded-lg px-3 md:px-5 md:py-3 text-nowrap py-2 shadow-lg hover:bg-gray-200 text-sm text-center">Create</a>
                 <a href="/meal-planner" className="text-gray-900 bg-white rounded-lg px-3 md:px-5 md:py-3 text-nowrap py-2 shadow-lg hover:bg-gray-200 text-sm text-center">My Week</a>
             </div>
             </div>
         </div>
-
         {/* recipes section */}
             <div className="flex flex-wrap justify-center gap-20 mt-24 px-4">
                     {meals.map((meal) => (
