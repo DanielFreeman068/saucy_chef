@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import DishCard from "../components/DishCard.jsx"
-import meals from '../recipes.json';
+import meals from '../../../backend/data/recipes.json';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -59,6 +59,27 @@ const ExplorePage = () => {
             </div>
             </div>
         </div>
+
+        {/* Filtration setup */}
+        <div className="flex m-18 gap-x-8 items-center overflow-hidden ">
+            <div className="flex text-xl text-[#953306] bg-[#F4E2CE] rounded-full px-4 py-2 gap-x-6">
+                <button>All</button>
+                <button>Appetizers</button>
+                <button>Starters</button>
+                <button>Main Courses</button>
+                <button>Side Dishes</button>
+                <button>Desserts</button>
+                <button>Favorites</button>
+
+            </div>
+            <div>
+                <input className="bg-[#F4E2CE] rounded-full px-4 py-3 min-w-80" type="text" placeholder="Search..." />
+            </div>
+            <div>
+                <button className="bg-[#F4E2CE] text-lg rounded-full p-2 px-5 text-amber-800 hover:bg-[#f7ece0] transition-colors">Clear All</button>
+            </div>
+        </div>
+
         {/* recipes section */}
             <div className="flex flex-wrap justify-center gap-20 mt-24 px-4">
                 {meals.map((meal) => (
