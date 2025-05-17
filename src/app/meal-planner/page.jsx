@@ -28,6 +28,7 @@ export default function Home() {
     const clearAllMeals = () => {
         setSelectedRecipes({});
         localStorage.removeItem('mealPlan');
+        alert("Weekly Meal Plan has been reset!")
     };
 
     return (
@@ -71,6 +72,49 @@ export default function Home() {
             </div>
 
             {/* meal planner section */}
+            <div className="flex flex-col gap-16 px-4">
+                {days.map((day) => (
+                <div key={day} className="bg-[#F4E2CE] rounded-2xl shadow-lg p-6 flex flex-col">
+                    <h2 className="text-2xl font-semibold text-start text-[#953306] mb-4">{day}</h2>
+                    <div className="flex flex-col md:flex-row justify-evenly gap-4">
+                    {meals.map((meal) => {
+                        const key = `${day}-${meal}`;
+                        const recipe = selectedRecipes[key];
+
+                        return (
+                        <div key={meal} className="bg-white w-full h-[160px] rounded-xl p-4">
+                            <div className="flex justify-center align-center h-full items-center">
+                                <div className="flex flex-col gap-6 text-center">
+                                    <span className="font-medium text-[#953306]">{meal}</span>
+                                    <div className="flex items-center gap-2 mx-auto">
+                                        {recipe && (
+                                        <button
+                                            onClick={() => deleteMeal(day, meal)}
+                                            className="text-red-500 hover:text-red-700 text-sm text-center"
+                                        >
+                                            - Delete
+                                        </button>
+                                        )}
+                                        <Link
+                                        href={`/select-recipe?day=${day}&meal=${meal}`}
+                                        className={`text-[#953306] hover:text-[#DFBC94] items-center gap-2 ${recipe ? 'hidden' : 'flex'}`}
+                                        >
+                                        <h1 className='text-2xl'>+</h1>
+                                        <h1 className='text-md'>Add Meal</h1>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        );
+                    })}
+                    </div>
+                </div>
+                ))}
+            </div>
+
+            {/* clear all button */}
             <div className="flex justify-center mb-8">
                 <button
                 onClick={clearAllMeals}
@@ -78,45 +122,6 @@ export default function Home() {
                 >
                 Clear All
                 </button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                {days.map((day) => (
-                <div key={day} className="bg-white rounded-2xl shadow-lg p-5 flex flex-col">
-                    <h2 className="text-2xl font-semibold text-center text-pink-300 mb-4">{day}</h2>
-                    <div className="flex flex-col gap-4">
-                    {meals.map((meal) => {
-                        const key = `${day}-${meal}`;
-                        const recipe = selectedRecipes[key];
-
-                        return (
-                        <div key={meal} className="bg-gray-100 rounded-xl p-4">
-                            <div className="flex justify-between items-center">
-                            <span className="font-medium text-pink-300">{meal}</span>
-                            <div className="flex items-center gap-2">
-                                {recipe && (
-                                <button
-                                    onClick={() => deleteMeal(day, meal)}
-                                    className="text-red-500 hover:text-red-700 text-sm"
-                                >
-                                    Delete
-                                </button>
-                                )}
-                                <Link
-                                href={`/select-recipe?day=${day}&meal=${meal}`}
-                                className="text-blue-600 hover:underline text-sm"
-                                >
-                                {recipe ? 'Change' : '+ Add'}
-                                </Link>
-                            </div>
-                            </div>
-                            {recipe && <p className="mt-2 text-sm text-gray-700 italic">{recipe}</p>}
-                        </div>
-                        );
-                    })}
-                    </div>
-                </div>
-                ))}
             </div>
         </div>
     );
