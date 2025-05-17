@@ -4,8 +4,8 @@
     const jwt = require('jsonwebtoken');
 
     // Function to generate a JWT token for a user
-    const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
+    const generateToken = (id, email) => {
+    return jwt.sign({  id, email }, process.env.JWT_SECRET, { expiresIn: '2d' });
     };
 
     // @desc    Register a new user
@@ -46,7 +46,7 @@
                     email: user.email,
                     favs: user.favs,
                 },
-                token: generateToken(user._id),
+                token: generateToken(user._id, user.email),
                 });
             } else {
                 res.status(400);
@@ -76,7 +76,7 @@
                     email: user.email,
                     favs: user.favs,
                 },
-                token: generateToken(user._id),
+                token: generateToken(user._id, user.email),
                 });
             } else {
                 res.status(401);
