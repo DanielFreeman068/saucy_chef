@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import DishCard from "../components/DishCard.jsx"
-import meals from '../recipes.json';
+import meals from '../../../backend/data/recipes.json';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
