@@ -36,8 +36,8 @@
     }, []);
 
     const handleLogout = () => {
-        localStorage.clear(); //Clears all localStorage keys
-        window.location.href = '/'; // redirect to login page
+        localStorage.clear(); 
+        window.location.href = '/'; 
         };
 
     return (
