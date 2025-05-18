@@ -13,11 +13,13 @@ const UserSchema = new mongoose.Schema({
         trim: true,
     },
     favs: {
-    type: [String],  
-    default: []   
+        type: [String],  
+        default: []   
+    },
+    mealPlan: {
+        type: Object,
+        default: {},
     }
-    
-    
 }, {collection: 'users'})
 
 module.exports = mongoose.model('User', UserSchema);

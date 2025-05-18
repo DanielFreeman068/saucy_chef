@@ -21,11 +21,6 @@ export default function AuthPage() {
     }));
   };
 
-  const toggleForm = () => {
-    setIsLogin(prev => !prev);
-    setError(null);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -66,10 +61,10 @@ export default function AuthPage() {
   return (
     <div className="flex h-screen w-screen overflow-hidden">
       {/* Left: Veggie Image */}
-      <div className="hidden w-2/3 md:flex h-full relative">
+      <div className="hidden w-2/3 lg:flex h-full relative">
         {/* Overlay Box */}
         <div className="absolute inset-0 flex items-center justify-center ">
-          <div className="bg-[#0000009d] p-18 rounded-md text-center max-w-2xl">
+          <div className="bg-[#0000009d] p-18 mx-2 rounded-md text-center max-w-2xl">
             <Image src="/saucy_chef_logo2.png" alt="Saucy Chef Logo" width={120} height={120} className="w-[50px] md:w-[60px] lg:w-[150px] mx-auto mb-14" />
             <h1 className="text-white text-5xl md:text-7xl font-bold mb-14">The Saucy Chef</h1>
             <h3 className="text-white text-2xl md:text-3xl mb-8">Discover, save, and plan amazing recipes</h3>
@@ -82,7 +77,7 @@ export default function AuthPage() {
       </div>
 
       {/* Right: Form Section */}
-      <div className="w-full md:w-2/3 flex flex-col justify-center items-center bg-white ">
+      <div className="w-full lg:w-2/3 flex flex-col justify-center items-center bg-white px-2">
         <div className="m-12 px-10 py-12 shadow-lg shadow-[#636363] rounded-md w-full max-w-md flex flex-col items-center justify-center">
 
 
