@@ -27,11 +27,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full">
       <body className={`min-h-screen flex flex-col ${inder.className} antialiased`}>
-        <main className="flex-grow">
+        <main>
           {children}
         </main>
-
-        
       </body>
     </html>
   );

@@ -83,40 +83,43 @@ export default function SelectRecipe() {
 
 
     return (
-        <div>
-        <NavBar page="Select Recipe" />
+        <>
+        <div className='min-h-screen flex flex-col'>
+            <NavBar page="Select Recipe" />
+            <div className='flex-grow'>
 
-            {/* === Filter Controls === */}
-            <div className="flex justify-center mt-10 mb-16 flex-wrap gap-4">
-            {categories.map((category) => (
-                <button
-                    key={category}
-                    className={`px-4 py-2 rounded-full shadow ${selectedCategory === category ? 'bg-[#953306] text-white' : 'bg-[#F4E2CE] text-[#953306]'}`}
-                    onClick={() => setSelectedCategory(category)}
-                >
-                    {category}
-                </button>
-            ))}
+                    {/* === Filter Controls === */}
+                    <div className="flex justify-center mt-10 mb-16 flex-wrap gap-4">
+                    {categories.map((category) => (
+                        <button
+                            key={category}
+                            className={`px-4 py-2 rounded-full shadow ${selectedCategory === category ? 'bg-[#953306] text-white' : 'bg-[#F4E2CE] text-[#953306]'}`}
+                            onClick={() => setSelectedCategory(category)}
+                        >
+                            {category}
+                        </button>
+                    ))}
+                    </div>
+
+                <div className="flex flex-wrap justify-center gap-20 mt-24 px-4">
+                    {filteredMeals.map((meal) => (
+                    <button
+                        key={meal.idMeal}
+                        onClick={() => handleRecipeSelect(meal)}
+                        className="hover:cursor-pointer transform transition-transform duration-200 hover:scale-105"
+                    >
+                        <DishesSelect
+                        name={meal.Name}
+                        location={meal.Area}
+                        image={meal.Image}
+                        category={meal.Category}
+                        />
+                    </button>
+                    ))}
+                </div>
             </div>
-
-        <div className="flex flex-wrap justify-center gap-20 mt-24 px-4">
-            {filteredMeals.map((meal) => (
-            <button
-                key={meal.idMeal}
-                onClick={() => handleRecipeSelect(meal)}
-                className="hover:cursor-pointer transform transition-transform duration-200 hover:scale-105"
-            >
-                <DishesSelect
-                name={meal.Name}
-                location={meal.Area}
-                image={meal.Image}
-                category={meal.Category}
-                />
-            </button>
-            ))}
+            <Footer />
         </div>
-
-        <Footer />
-        </div>
+        </>
     );
 }
