@@ -2,7 +2,7 @@ import { IoMdClose } from "react-icons/io";
 import meals from '../../../../backend/data/recipes.json';
 import Link from 'next/link'
 import { CgBowl } from "react-icons/cg";
-
+import { CiStar } from "react-icons/ci";
 
 
 export default async function RecipeCard({ params }) {
@@ -26,14 +26,14 @@ export default async function RecipeCard({ params }) {
     }
 
     return (
-        <div className="flex flex-col md:flex-row bg-orange-50 rounded-lg overflow-hidden shadow-lg m-10">
+        <div className="flex flex-col md:flex-row bg-orange-50 rounded-lg overflow-hidden shadow-lg mt-15 m-10">
             {/* Image - Full width on mobile, 2/5 on desktop */}
             <div className="w-full md:w-3/7 md:sticky md:top-0 md:self-start">
                 <Link href="/explore" className='hover:cursor-pointer'><IoMdClose className="absolute m-4 text-5xl "/></Link>
                 <img 
                     src={meal.Image} 
                     alt={meal.Name} 
-                    className="w-full h-64 md:h-full object-cover"
+                    className="w-full h-64 md:h-4/5 object-cover"
                 />
             </div>
             
@@ -41,7 +41,7 @@ export default async function RecipeCard({ params }) {
             <div className="w-full md:w-3/5 p-4 md:p-6 md:overflow-y-auto md:max-h-[45rem]">
                 <div className="flex justify-between items-start mb-4">
                     <h1 className="text-4xl md:text-5xl font-bold text-[#B53325]">{meal.Name}</h1>
-                    <div className="text-2xl md:text-3xl text-yellow-500">☆</div>
+                    <span className="text-5xl text-amber-700"><CiStar /></span>
                 </div>
                 
                 <p className="text-sm md:text-base text-[#953306] mb-4">

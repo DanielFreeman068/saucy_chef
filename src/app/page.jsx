@@ -132,7 +132,7 @@ export default function AuthPage() {
 
           {error && <p className="text-red-500 mb-4">{error}</p>}
 
-          <button type="submit" className="w-full p-2 mt-6 bg-[#7F0B04] text-white rounded-sm hover:bg-hl-blue transition" >
+          <button type="submit" className="w-full p-2 mt-6 bg-[#7F0B04] text-white rounded-sm hover:bg-[#a1312b] transition" >
             {isLogin ? 'Login' : 'Sign Up'}
           </button>
         </form>
