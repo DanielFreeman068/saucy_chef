@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Link from 'next/link'
 import NavBar from '../components/NavBar'
+import Footer from '../components/Footer.jsx'
 
 const ExplorePage = () => {
         const router = useRouter();
@@ -40,6 +41,7 @@ const ExplorePage = () => {
                 ))}
             </div>
         </div>
+        <Footer/>
         </>
     )
 }

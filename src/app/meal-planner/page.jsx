@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import NavBar from '../components/NavBar'
+import Footer from '../components/Footer.jsx'
 
 export default function Home() {
     const router = useRouter();
@@ -133,6 +134,7 @@ export default function Home() {
                 Clear All
                 </button>
             </div>
+            <Footer/>
         </div>
     );
 }

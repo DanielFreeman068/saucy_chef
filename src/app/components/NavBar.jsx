@@ -2,14 +2,24 @@
     import { useState, useRef, useEffect } from 'react';
     import { Menu, Search, Bell } from 'lucide-react';
     import Image from "next/image";
+    import Link from 'next/link'
 
     export default function Navbar({ page }) {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const [isSelect, setIsSelect] = useState(false)
 
     if (!page){
         page = "The Saucy Chef"
     }
+
+    useEffect(()=>{
+        if(page === "Select Recipe"){
+        setIsSelect(true)
+        
+    }
+    })
+    
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -35,12 +45,19 @@
         {/* Navbar */}
         <div className="flex items-center justify-between px-4 py-3 bg-[#F4E2CE] shadow-lg shadow-[#00000033]">
             <div className="relative" ref={dropdownRef}>
-            <button 
-                onClick={() => setIsOpen(!isOpen)} 
-                className="p-2 text-[#6e2604] hover:text-[#53230c]"
-            >
-                <Menu size={46} />
-            </button>
+            
+            {isSelect ? (
+                <div className="flex flex-row gap-6">
+                        <Link href="/meal-planner" className="text-gray-900 bg-white rounded-lg px-3 md:px-5 md:py-3 text-nowrap py-2 shadow-lg hover:bg-gray-200 text-sm text-center">
+                            Cancel
+                        </Link>
+                    </div>
+                ) : (
+                <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-[#6e2604] hover:text-[#53230c]">
+                    <Menu size={46} />
+                </button>
+            )}
+            
             
             {/* Dropdown menu */}
             {isOpen && (

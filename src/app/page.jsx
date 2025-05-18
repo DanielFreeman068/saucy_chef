@@ -66,7 +66,18 @@ export default function AuthPage() {
   return (
     <div className="flex h-screen w-screen overflow-hidden">
       {/* Left: Veggie Image */}
-      <div className=" hidden w-2/3 md:block h-full">
+      <div className="hidden w-2/3 md:flex h-full relative">
+        {/* Overlay Box */}
+        <div className="absolute inset-0 flex items-center justify-center ">
+          <div className="bg-[#0000009d] p-18 rounded-md text-center max-w-2xl">
+            <Image src="/saucy_chef_logo2.png" alt="Saucy Chef Logo" width={120} height={120} className="w-[50px] md:w-[60px] lg:w-[150px] mx-auto mb-14" />
+            <h1 className="text-white text-5xl md:text-7xl font-bold mb-14">The Saucy Chef</h1>
+            <h3 className="text-white text-2xl md:text-3xl mb-8">Discover, save, and plan amazing recipes</h3>
+            <h5 className="text-white text-lg md:text-lg">Join thousands of home cooks discovering new flavors every day.</h5>
+          </div>
+        </div>
+
+        {/* Background Image */}
         <img
           src="/veggies.jpg"
           alt="Vegetables"
@@ -75,25 +86,14 @@ export default function AuthPage() {
       </div>
 
       {/* Right: Form Section */}
-      <div className="w-full md:w-2/3 flex flex-col justify-center items-center bg-white">
+      <div className="w-full md:w-2/3 flex flex-col justify-center items-center bg-white ">
+      <div className=' m-12 p-22 shadow-lg shadow-[#636363] '>
+
         {/* Toggle Buttons */}
-        <div className="flex items-center justify-center mb-6 w-80">
-          <button
-            onClick={() => setIsLogin(true)}
-            className={`flex-1 py-2 text-center font-medium transition-colors ${
-              isLogin ? 'bg-dark-blue text-white' : 'bg-gray-200 text-gray-700'
-            } rounded-sm`}
-          >
-            Login
-          </button>
-          <button
-            onClick={() => setIsLogin(false)}
-            className={`flex-1 py-2 text-center font-medium transition-colors ${
-              !isLogin ? 'bg-dark-blue text-white' : 'bg-gray-200 text-gray-700'
-            } rounded-sm`}
-          >
-            Sign Up
-          </button>
+        <div className="flex items-center justify-center mb-6 w-80 ">
+          <button onClick={() => setIsLogin(true)} className={`flex-1 py-2 text-center font-medium transition-colors ${ isLogin ? 'bg-dark-blue text-white' : 'bg-gray-200 text-gray-700'} rounded-sm`}>Login</button>
+
+          <button onClick={() => setIsLogin(false)} className={`flex-1 py-2 text-center font-medium transition-colors ${ !isLogin ? 'bg-dark-blue text-white' : 'bg-gray-200 text-gray-700' } rounded-sm`} >Sign Up</button>
         </div>
 
         {/* Title */}
@@ -140,6 +140,7 @@ export default function AuthPage() {
             {isLogin ? 'Login' : 'Sign Up'}
           </button>
         </form>
+      </div>
       </div>
     </div>
   );
