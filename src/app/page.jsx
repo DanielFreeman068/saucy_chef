@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 
 
 export default function AuthPage() {
@@ -127,9 +128,11 @@ export default function AuthPage() {
 
           {error && <p className="text-red-500 mb-4">{error}</p>}
 
-          <button type="submit" className="w-full p-2 mt-6 bg-[#7F0B04] text-white rounded-sm hover:bg-[#a1312b] transition" >
+          <button type="submit" className="w-full p-2 mt-6 bg-[#7F0B04] hover:bg-[#a1312b] text-white rounded-sm transition" >
             {isLogin ? 'Login' : 'Sign Up'}
           </button>
+
+          <Link href="/forgot-password" className='flex justify-center text-blue-700 text-sm mt-6 hover:underline'>forgot password</Link>
         </form>
       </div>
       </div>
