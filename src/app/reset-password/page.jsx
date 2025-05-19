@@ -47,7 +47,7 @@ export default function ResetPassword() {
             <button
                 type="button"
                 onClick={() => router.push('/')}
-                className="absolute top-3 left-3 text-white px-4 py-2 bg-[#7F0B04] hover:bg-[#a1312b] text-white rounded-sm transition"
+                className="absolute top-3 left-3 px-4 py-2 bg-[#7F0B04] hover:bg-[#a1312b] text-white rounded-sm transition"
             >
                 Cancel
             </button>
