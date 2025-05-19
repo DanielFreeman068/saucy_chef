@@ -94,7 +94,7 @@ const handleToggleFavorite = async () => {
                 <Link href="/explore" className='hover:cursor-pointer'>
                     <IoMdClose className="absolute m-4 text-5xl" />
                 </Link>
-                <img src={meal.Image} alt={meal.Name} className="w-full h-64 md:h-4/5 object-cover" />
+                <img src={meal.Image} alt={meal.Name} className="w-full h-64 md:min-h-[720px] md:h-4/5 object-cover" />
             </div>
 
             <div className="w-full md:w-3/5 p-4 md:p-6 md:overflow-y-auto md:max-h-[45rem]">

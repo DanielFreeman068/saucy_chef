@@ -30,6 +30,8 @@ export default function ResetPassword() {
             const data = await res.json();
             if (res.ok) {
                 setMessage('✅ Password reset successful!');
+                alert("Password Successfully Reset!")
+                router.push('/');
             } else {
                 setMessage(data.message || 'Something went wrong');
             }
