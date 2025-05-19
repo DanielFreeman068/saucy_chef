@@ -5,6 +5,8 @@ const app = express()
 const cors = require('cors')
 const morgan = require('morgan')
 const { connectDB } = require('./db/connect.js');
+const multer = require('multer');
+const path = require('path');
 const port = 4000
 
 // Middleware
@@ -21,6 +23,8 @@ app.use(express.urlencoded({extended : false}));
 app.use('/api/login', require('./routes/userRoutes'));
 app.use('/api/signup', require('./routes/userRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/upload', require('./routes/imageRoutes'));
+app.use('/api/create-recipe', require('./routes/recipeRoutes'))
 
 
 
