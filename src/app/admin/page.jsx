@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Navbar from '../components/NavBar';
 import Link from 'next/link';
-import meals from '../../../backend/data/recipes.json';
 import { Trash } from 'lucide-react';
 
 export default function AdminPage() {
@@ -14,8 +13,23 @@ export default function AdminPage() {
   const [error, setError] = useState('');           // Holds error message
   const [isUnlocking, setIsUnlocking] = useState(false); // Triggers fade transition
   const [users, setUsers] = useState([]);
+  const [meals, setMeals] = useState([]);
 
   const correctPassword = '123';
+
+  const loadMeals = async () => {
+    try {
+      const res = await fetch('http://localhost:4000/api/create-recipe/all-recipes');
+      const data = await res.json();
+      setMeals(data); 
+    } catch (err) {
+      console.error('Failed to load meals:', err);
+    }
+  };
+
+  useEffect(() => {
+    loadMeals();
+  }, []);
 
   // === Handle Password Submit ===
   const handleSubmit = (e) => {
@@ -68,7 +82,7 @@ export default function AdminPage() {
       const data = await res.json();
       if (data.success) {
         alert(data.message);
-        fetchUsers(); // Refresh list
+        fetchUsers();
       } else {
         alert('Failed to delete user: ' + data.message);
       }
@@ -77,6 +91,33 @@ export default function AdminPage() {
       alert('Request failed.');
     }
   };
+
+  const handleDeleteRecipe = async (idMeal) =>{
+    const confirmDelete = confirm('Are you sure you want to delete this recipe?');
+    if (!confirmDelete) return;
+
+    try {
+      const res = await fetch('http://localhost:4000/api/create-recipe/delete', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          adminPassword: correctPassword,
+          idMeal,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert(data.message);
+        loadMeals()
+      } else {
+        alert('Failed to delete user: ' + data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Request failed.');
+    }
+  }
 
   return (
     <div className="relative h-screen w-screen overflow-hidden">
@@ -118,7 +159,6 @@ export default function AdminPage() {
         )}
       >
         <div className="container mx-auto p-6 max-w-6xl">
-          {/* Users Section */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Users</h2>
             
@@ -140,29 +180,32 @@ export default function AdminPage() {
                 ))}
             </div>
           </section>
-
-          {/* Recipes Section - Made Scrollable */}
           <section>
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Recipes</h2>
             
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="max-h-120 overflow-y-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 sticky top-0 z-10">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200">
+              <div className="h-[40vh] overflow-y-auto">
+                <div className="w-full">
+                  <div className="bg-gray-50 sticky top-0 z-10 flex">
+                    <div className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider flex-1">ID</div>
+                    <div className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider flex-1">Name</div>
+                  </div>
+                  <div className="divide-y divide-gray-200">
                     {meals.map(meal => (
-                      <tr key={meal.idMeal} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{meal.idMeal}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{meal.Name}</td>
-                      </tr>
+                      <div key={meal.idMeal} className="hover:bg-gray-50 flex">
+                        <div className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 flex-1">{meal.idMeal}</div>
+                        <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex-1">{meal.Name}</div>
+                        <button 
+                          onClick={() => handleDeleteRecipe(meal.idMeal)}
+                          className="p-2 text-red-500 hover:bg-red-100 rounded-full transition-colors"
+                          aria-label="Delete user"
+                          >
+                          <Trash size={18} />
+                        </button>
+                      </div>
                     ))}
-                  </tbody>
-                </table>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
