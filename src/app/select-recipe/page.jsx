@@ -15,6 +15,8 @@ export default function SelectRecipe() {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [favorites, setFavorites] = useState([]);
     const [loadingFavorites, setLoadingFavorites] = useState(true);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchText, setSearchText] = useState('');
 
     const day = searchParams.get('day');
     const meal = searchParams.get('meal');
@@ -22,8 +24,17 @@ export default function SelectRecipe() {
     // Unique categories from meals
     const categories = ['All', 'Favorites', ...new Set(meals.map(meal => meal.Category))];
 
-    // Filter meals excluding favorites when not on 'Favorites' category
-    const filteredMeals = selectedCategory === 'Favorites' ? favorites : selectedCategory === 'All' ? meals : meals.filter(meal => meal.Category === selectedCategory)
+    // Filtering logic by category n search query
+    const baseMeals =
+        selectedCategory === 'Favorites'
+            ? favorites
+            : selectedCategory === 'All'
+            ? meals
+            : meals.filter(meal => meal.Category === selectedCategory);
+
+    const filteredMeals = baseMeals.filter(meal =>
+        meal.Name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     // Check for token and fetch current meal plan from backend
     useEffect(() => {
@@ -113,6 +124,23 @@ export default function SelectRecipe() {
         <div className='min-h-screen flex flex-col'>
             <NavBar page="Select Recipe" />
             <div className='flex-grow'>
+
+                {/* Search Input */}
+                <div className="flex justify-center mt-10 mb-8 gap-2">
+                    <input
+                        type="text"
+                        placeholder="Search by recipe name..."
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+                        className="w-64 px-4 py-2 border border-[#953306] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#953306]"
+                    />
+                    <button
+                        onClick={() => setSearchQuery(searchText)}
+                        className="bg-[#953306] text-white px-4 py-2 rounded-lg shadow hover:bg-[#7a2802]"
+                    >
+                        Search
+                    </button>
+                </div>
 
                 {/* === Filter Controls === */}
                 <div className="flex justify-center mt-10 mb-16 flex-wrap gap-4">
