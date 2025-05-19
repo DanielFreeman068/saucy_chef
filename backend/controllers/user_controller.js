@@ -7,6 +7,8 @@ const generateToken = (id, email) => {
     return jwt.sign({ id, email }, process.env.JWT_SECRET, { expiresIn: '2d' });
 };
 
+
+
 // Register user
 const registerUser = async (req, res) => {
     const { email, password, favs = [] } = req.body;
@@ -48,6 +50,55 @@ const registerUser = async (req, res) => {
         throw new Error("Invalid user data");
     }
 };
+
+//get all users for admin page
+const getAllUsers = async (req, res) => {
+    const { adminPassword } = req.body;
+
+    if (!adminPassword || adminPassword !== process.env.ADMIN_PASSWORD) {
+        return res.status(403).json({ success: false, message: 'Access denied. Invalid admin password.' });
+    }
+
+    const users = await User.find().select('-password');
+
+    res.json({
+        success: true,
+        users,
+    });
+};
+
+//delete user from admin page
+const deleteUser = async (req, res) => {
+    const { adminPassword, userId } = req.body;
+
+    if (!adminPassword || adminPassword !== process.env.ADMIN_PASSWORD) {
+        return res.status(403).json({ success: false, message: 'Access denied. Invalid admin password.' });
+    }
+
+    try {
+        const deletedUser = await User.findByIdAndDelete(userId);
+        
+        if (!deletedUser) {
+            return res.status(404).json({
+                success: false,
+                message: `User with ID ${userId} not found.`
+            });
+        }
+        
+        res.json({
+            success: true,
+            message: `User with ID ${userId} has been deleted.`,
+        });
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).json({
+            success: false,
+            message: 'An error occurred while deleting the user.',
+            error: error.message
+        });
+    }
+};
+
 
 // Login user
 const loginUser = async (req, res) => {
@@ -162,6 +213,8 @@ const getFavorites = async (req, res) => {
 module.exports = {
     registerUser,
     loginUser,
+    getAllUsers,
+    deleteUser,
     getMealPlan,
     updateMealPlan,
     clearMealPlan,

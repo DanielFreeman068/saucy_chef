@@ -3,6 +3,8 @@ const router = express.Router();
 const {
     registerUser,
     loginUser,
+    getAllUsers,
+    deleteUser,
     getMealPlan,
     updateMealPlan,
     clearMealPlan,
@@ -15,6 +17,8 @@ const protect = require('../middleware/auth');
 
 router.post('/register', asyncWrapper(registerUser));
 router.post('/login', asyncWrapper(loginUser));
+router.post("/get-all", asyncWrapper(getAllUsers))
+router.delete("/delete", asyncWrapper(deleteUser))
 
 // Meal Plan Routes
 router.get('/meal-plan', protect, getMealPlan);
