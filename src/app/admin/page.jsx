@@ -120,7 +120,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden">
+    <div className="relative h-screen w-screen overflow-x-hidden">
       {/* === Navbar === */}
       <Navbar page="Admin Dashboard" />
 
