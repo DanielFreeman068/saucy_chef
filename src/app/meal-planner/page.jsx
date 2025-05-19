@@ -185,14 +185,40 @@ export default function Home() {
         </div>
 
         {/* clear all button */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center my-8">
             <button
             onClick={clearAllMeals}
-            className="bg-red-500 text-white px-6 py-2 rounded-full shadow hover:bg-red-600 transition"
+            className="bg-[#B53325] text-white px-16 py-2 rounded-lg shadow hover:bg-[#912b20] transition"
             >
             Clear All
             </button>
         </div>
+
+        {/* ingredients list */}
+        <div className="mt-12 px-6">
+            <h2 className="text-2xl font-semibold text-[#953306] mb-4">Ingredients Needed This Week:</h2>
+            <ul className="list-disc list-inside text-[#953306] text-lg">
+                {Object.values(selectedRecipes)
+                    .flatMap(recipe => {
+                        const ingredients = [];
+
+                        for (let i = 1; i <= 20; i++) {
+                            const ingredient = recipe[`Ingredient${i}`];
+                            const measure = recipe[`Measure${i}`];
+                            if (ingredient && ingredient.trim() !== '') {
+                                ingredients.push(`${measure ? measure.trim() : ''} ${ingredient.trim()}`);
+                            }
+                        }
+
+                        return ingredients;
+                    })
+                    .filter(Boolean)
+                    .map((ingredient, idx) => (
+                        <li key={idx}>{ingredient}</li>
+                    ))}
+            </ul>
+        </div>
+
 
         <Footer />
         </div>
