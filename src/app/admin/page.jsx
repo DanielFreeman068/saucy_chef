@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import Navbar from '../components/NavBar';
 import Link from 'next/link';
 import { Trash } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function AdminPage() {
   // === State Definitions ===
@@ -14,6 +15,7 @@ export default function AdminPage() {
   const [isUnlocking, setIsUnlocking] = useState(false); // Triggers fade transition
   const [users, setUsers] = useState([]);
   const [meals, setMeals] = useState([]);
+  const router = useRouter();
 
   const correctPassword = '123';
 
@@ -110,6 +112,7 @@ export default function AdminPage() {
       if (data.success) {
         alert(data.message);
         loadMeals()
+        router.refresh()
       } else {
         alert('Failed to delete user: ' + data.message);
       }

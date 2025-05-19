@@ -44,19 +44,19 @@ const createRecipe = (req, res) => {
 
 const getRecipes = (req,res) =>{
     const recipesFilePath = path.join(__dirname, '../data/recipes.json');
-  
+
     fs.readFile(recipesFilePath, 'utf-8', (err, data) => {
-      if (err) {
-        console.error('Error reading recipes:', err);
-        return res.status(500).json({ success: false, message: 'Failed to load recipes.' });
-      }
-      
-      try {
-        const recipes = JSON.parse(data);
-        res.json(recipes);
-      } catch (parseErr) {
-        res.status(500).json({ success: false, message: 'Invalid JSON format.' });
-      }
+        if (err) {
+            console.error('Error reading recipes:', err);
+            return res.status(500).json({ success: false, message: 'Failed to load recipes.' });
+        }
+        
+        try {
+            const recipes = JSON.parse(data);
+            res.json(recipes);
+        } catch (parseErr) {
+            res.status(500).json({ success: false, message: 'Invalid JSON format.' });
+        }
     });
 }
 
