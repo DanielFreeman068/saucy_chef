@@ -73,7 +73,7 @@ export default function AuthPage() {
         </div>
 
         {/* Background Image */}
-        <img src="/veggies.jpg" alt="Vegetables" className="w-full h-full object-cover" />
+        <img src="/veggies.jpg" alt="Vegetables" className="w-full h-screen object-cover" />
       </div>
 
       {/* Right: Form Section */}

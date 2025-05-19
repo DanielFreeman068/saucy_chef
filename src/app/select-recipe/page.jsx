@@ -13,15 +13,17 @@ export default function SelectRecipe() {
 
     const [mealPlan, setMealPlan] = useState({});
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [favorites, setFavorites] = useState([]);
+    const [loadingFavorites, setLoadingFavorites] = useState(true);
 
     const day = searchParams.get('day');
     const meal = searchParams.get('meal');
 
     // Unique categories from meals
-    const categories = ['All', ...new Set(meals.map(meal => meal.Category))];
+    const categories = ['All', 'Favorites', ...new Set(meals.map(meal => meal.Category))];
 
-    // Filtered meals
-    const filteredMeals = selectedCategory === 'All' ? meals : meals.filter(meal => meal.Category === selectedCategory);
+    // Filter meals excluding favorites when not on 'Favorites' category
+    const filteredMeals = selectedCategory === 'Favorites' ? favorites : selectedCategory === 'All' ? meals : meals.filter(meal => meal.Category === selectedCategory)
 
     // Check for token and fetch current meal plan from backend
     useEffect(() => {
@@ -34,10 +36,10 @@ export default function SelectRecipe() {
         const fetchMealPlan = async () => {
         try {
             const res = await fetch('http://localhost:4000/api/users/meal-plan', {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
 
             if (res.ok) {
@@ -52,6 +54,30 @@ export default function SelectRecipe() {
         };
 
         fetchMealPlan();
+
+        const fetchFavorites = async () => {
+            try {
+                const res = await fetch('http://localhost:4000/api/users/favorites', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!res.ok) throw new Error('Failed to fetch favorites');
+
+                const data = await res.json();
+
+                // Convert meal ids to strings for consistent comparison
+                const favMeals = meals.filter(meal => data.favs.includes(meal.idMeal.toString()));
+                setFavorites(favMeals);
+            } catch (error) {
+                console.error('Error fetching favorites:', error);
+            } finally {
+                setLoadingFavorites(false);
+            }
+        };
+
+        fetchFavorites();
     }, [router]);
 
     // Handle recipe selection and update backend meal plan
@@ -88,35 +114,47 @@ export default function SelectRecipe() {
             <NavBar page="Select Recipe" />
             <div className='flex-grow'>
 
-                    {/* === Filter Controls === */}
-                    <div className="flex justify-center mt-10 mb-16 flex-wrap gap-4">
-                    {categories.map((category) => (
-                        <button
-                            key={category}
-                            className={`px-4 py-2 rounded-full shadow ${selectedCategory === category ? 'bg-[#953306] text-white' : 'bg-[#F4E2CE] text-[#953306]'}`}
-                            onClick={() => setSelectedCategory(category)}
-                        >
-                            {category}
-                        </button>
-                    ))}
-                    </div>
-
-                <div className="flex flex-wrap justify-center gap-20 mt-24 px-4">
-                    {filteredMeals.map((meal) => (
+                {/* === Filter Controls === */}
+                <div className="flex justify-center mt-10 mb-16 flex-wrap gap-4">
+                {categories.map((category) => (
                     <button
-                        key={meal.idMeal}
-                        onClick={() => handleRecipeSelect(meal)}
-                        className="hover:cursor-pointer transform transition-transform duration-200 hover:scale-105"
+                        key={category}
+                        className={`px-4 py-2 rounded-full shadow ${selectedCategory === category ? 'bg-[#953306] text-white' : 'bg-[#F4E2CE] text-[#953306]'}`}
+                        onClick={() => setSelectedCategory(category)}
                     >
-                        <DishesSelect
-                        name={meal.Name}
-                        location={meal.Area}
-                        image={meal.Image}
-                        category={meal.Category}
-                        />
+                        {category}
                     </button>
-                    ))}
+                ))}
                 </div>
+
+                {/* Loading and empty states */}
+                {selectedCategory === 'Favorites' && loadingFavorites && (
+                    <p className="text-center text-[#953306]">Loading favorites...</p>
+                )}
+
+                {!loadingFavorites && (
+                    filteredMeals.length === 0 ? (
+                        <p className="text-center text-[#953306]">No recipes found.</p>
+                    ) : (
+                        <div className="flex flex-wrap justify-center gap-20 mt-24 px-4">
+                            {filteredMeals.map((meal) => (
+                            <button
+                                key={meal.idMeal}
+                                onClick={() => handleRecipeSelect(meal)}
+                                className="hover:cursor-pointer transform transition-transform duration-200 hover:scale-105"
+                            >
+                                <DishesSelect
+                                name={meal.Name}
+                                location={meal.Area}
+                                image={meal.Image}
+                                category={meal.Category}
+                                isFavorite={favorites.some(fav => fav.idMeal.toString() === meal.idMeal.toString())}
+                                />
+                            </button>
+                            ))}
+                        </div>
+                    )
+                )}
             </div>
             <Footer />
         </div>

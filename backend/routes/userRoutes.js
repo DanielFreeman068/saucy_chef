@@ -5,7 +5,9 @@ const {
     loginUser,
     getMealPlan,
     updateMealPlan,
-    clearMealPlan
+    clearMealPlan,
+    getFavorites,
+    addToFavorites
 } = require('../controllers/user_controller');
 
 const asyncWrapper = require('../middleware/async');
@@ -18,5 +20,9 @@ router.post('/login', asyncWrapper(loginUser));
 router.get('/meal-plan', protect, getMealPlan);
 router.put('/meal-plan', protect, updateMealPlan);
 router.delete('/meal-plan', protect, clearMealPlan);
+
+// Favorite Routes
+router.get('/favorites', protect, asyncWrapper(getFavorites));
+router.post('/favorites', protect, asyncWrapper(addToFavorites));
 
 module.exports = router;

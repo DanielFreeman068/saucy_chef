@@ -1,8 +1,9 @@
-    import React from 'react';
-    import { CiStar } from "react-icons/ci";
-    import Link from 'next/link';
+import React from 'react';
+import { CiStar } from "react-icons/ci";
+import { AiFillStar } from "react-icons/ai";
+import Link from 'next/link';
 
-    const DishCard = ({ id, name, image, location, category }) => {
+const DishCard = ({ id, name, image, location, category, isFavorite }) => {
     return (
         <div
         className="w-72 p-6 rounded-sm flex flex-col justify-between my-10 transform transition-transform duration-200 hover:scale-105"
@@ -44,9 +45,13 @@
         {/* === Footer: Star Icon + Location === */}
         <div className="mt-auto flex items-center justify-between pt-2 border-t border-[#e5a657]">
             <div className="flex items-center">
-            <span className="text-3xl text-amber-700">
-                <CiStar />
-            </span>
+                <span
+                    className="text-3xl"
+                    title={isFavorite ? "Favorite" : "Not Favorite"}
+                    style={{ color: isFavorite ? '#fbbf24' : '#b7791f' }}
+                >
+                    {isFavorite ? <AiFillStar /> : <CiStar />}
+                </span>
             </div>
             <div className="text-lg text-amber-700">
             {location || "Area"}
@@ -54,6 +59,6 @@
         </div>
         </div>
     );
-    };
+};
 
-    export default DishCard;
+export default DishCard;

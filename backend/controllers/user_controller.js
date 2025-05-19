@@ -89,7 +89,7 @@ const getMealPlan = async (req, res) => {
     res.json({ mealPlan: user.mealPlan });
 };
 
-// Update meal plan (add/update or delete single meal)
+// Update meal plan
 const updateMealPlan = async (req, res) => {
     const userId = req.user.id;
     const newMealPlan = req.body.mealPlan;
@@ -124,10 +124,47 @@ const clearMealPlan = async (req, res) => {
     res.json({ success: true, mealPlan: {} });
 };
 
+// POST /favorites
+const addToFavorites = async (req, res) => {
+    const userId = req.user.id;
+    const { mealId } = req.body;
+
+    if (!mealId) return res.status(400).json({ message: 'mealId is required' });
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    if (!user.favs.includes(mealId)) {
+        user.favs.push(mealId);
+    } else {
+        user.favs = user.favs.filter(id => id !== mealId);
+    }
+
+    await user.save();
+
+    res.status(200).json({ success: true, favs: user.favs });
+};
+
+
+// GET /favorites
+const getFavorites = async (req, res) => {
+    const userId = req.user.id;
+
+    const user = await User.findById(userId);
+    if (!user) {
+        return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    res.status(200).json({ success: true, favs: user.favs });
+};
+
+
 module.exports = {
     registerUser,
     loginUser,
     getMealPlan,
     updateMealPlan,
     clearMealPlan,
+    addToFavorites,
+    getFavorites
 };
