@@ -136,11 +136,18 @@ export default function Home() {
                 
                 if (recipe) {
                     const ingredients = [];
-                    for (let i = 1; i <= 20; i++) {
-                        const ingredient = recipe[`Ingredient${i}`];
-                        const measure = recipe[`Measure${i}`];
-                    }
-                    
+                        for (let i = 1; i <= 20; i++) {
+                            const ingredient = recipe[`Ingredient${i}`];
+                            const measure = recipe[`Measure${i}`];
+                            
+                            if (ingredient && ingredient.trim() !== '') {
+                                if (measure && measure.trim() !== '') {
+                                    ingredients.push(`${measure} ${ingredient}`);
+                                } else {
+                                    ingredients.push(ingredient);
+                                }
+                            }
+                        }                  
                     cellRef.value = `${recipe.Name}\n\nIngredients:\n${ingredients.join('\n')}`;
                 } else {
                     cellRef.value = 'No meal selected';
