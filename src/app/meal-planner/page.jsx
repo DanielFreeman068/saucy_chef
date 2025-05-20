@@ -251,51 +251,31 @@ export default function Home() {
                 ))}
             </div>
 
-            {/* clear all button */}
-            <div className="flex justify-center my-8">
-                <button
-                onClick={clearAllMeals}
-                className="bg-[#B53325] text-white px-16 py-2 rounded-lg shadow hover:bg-[#912b20] transition"
-                >
-                Clear All
-                </button>
-            </div>
-
-            {/* ingredients list */}
-            <div className="mt-12 px-6">
-                <h2 className="text-2xl font-semibold text-[#953306] mb-4">Ingredients Needed This Week:</h2>
-                <ul className="list-disc list-inside text-[#953306] text-lg">
-                    {Object.values(selectedRecipes)
-                        .flatMap(recipe => {
-                            const ingredients = [];
-
-                            for (let i = 1; i <= 20; i++) {
-                                const ingredient = recipe[`Ingredient${i}`];
-                                const measure = recipe[`Measure${i}`];
-                                if (ingredient && ingredient.trim() !== '') {
-                                    ingredients.push(`${measure ? measure.trim() : ''} ${ingredient.trim()}`);
-                                }
-                            }
-
-                            return ingredients;
-                        })
-                        .filter(Boolean)
-                        .map((ingredient, idx) => (
-                            <li key={idx}>{ingredient}</li>
-                        ))}
-                </ul>
-            </div>
-            <div>
-                <div className="flex justify-center my-8">
+            {/* buttons for clearing and downloading meal plan */}
+            <div className="flex flex-col md:flex-row gap-6 my-4 p-4 justify-center">
+                {/* clear all button */}
+                <div className="flex justify-center">
                     <button
-                        onClick={downloadMealPlanExcel}
-                        className="bg-[#953306] text-white px-16 py-2 rounded-lg shadow hover:bg-[#712606] transition flex items-center gap-2"
+                    onClick={clearAllMeals}
+                    className="bg-[#B53325] text-white px-16 py-2 rounded-lg shadow hover:bg-[#912b20] transition"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        Download Shopping List
+                    Clear All
                     </button>
+                </div>
+
+                {/* download button */}
+                <div>
+                    <div className="flex justify-center">
+                        <button
+                            onClick={downloadMealPlanExcel}
+                            className="bg-[#B53325] text-white px-16 py-2 rounded-lg shadow hover:bg-[#912b20] transition flex items-center gap-2"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Download Shopping List
+                        </button>
+                    </div>
                 </div>
             </div>
 
