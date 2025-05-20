@@ -200,7 +200,7 @@ export default function AdminPage() {
                         <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex-1">{meal.Name}</div>
                         <button 
                           onClick={() => handleDeleteRecipe(meal.idMeal)}
-                          className="p-2 text-red-500 hover:bg-red-100 rounded-full transition-colors"
+                          className="p-2 h-[50px] w-[50px] flex justify-center items-center text-red-500 hover:bg-red-100 rounded-full transition-colors"
                           aria-label="Delete user"
                           >
                           <Trash size={18} />
