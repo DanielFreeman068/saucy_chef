@@ -19,7 +19,10 @@ const UserSchema = new mongoose.Schema({
     mealPlan: {
         type: Object,
         default: {},
-    }
+    },
+    resetCode: String,
+    resetCodeExpires: Date,
+
 }, {collection: 'users'})
 
 module.exports = mongoose.model('User', UserSchema);
