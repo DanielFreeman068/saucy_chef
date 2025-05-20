@@ -28,7 +28,7 @@ exports.forgotPassword = async (req, res) => {
     });
 
     const mailOptions = {
-        from: 'Saucy Chef Support',
+        from: process.env.EMAIL_USER,
         to: email,
         subject: 'Your Password Reset Code',
         html: `<p>Your password reset code is:</p><h2>${code}</h2><p>This code expires in 15 minutes.</p>`,

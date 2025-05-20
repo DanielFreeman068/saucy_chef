@@ -32,7 +32,7 @@ export default function Home() {
         if (!token) return;
 
         try {
-            const res = await fetch('http://localhost:4000/api/users/meal-plan', {
+            const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/meal-plan', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -60,7 +60,7 @@ export default function Home() {
 
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:4000/api/users/meal-plan', {
+            const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/meal-plan', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ export default function Home() {
         const token = localStorage.getItem('token');
 
         try {
-        const res = await fetch('http://localhost:4000/api/users/meal-plan', {
+        const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/meal-plan', {
             method: 'DELETE',
             headers: {
             Authorization: `Bearer ${token}`,

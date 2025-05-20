@@ -27,7 +27,7 @@ export default function AuthPage() {
     setError(null);
 
     try {
-      const endpoint = isLogin ? 'http://localhost:4000/api/login/login': 'http://localhost:4000/api/signup/register';
+      const endpoint = isLogin ? 'https://saucy-chef-backend.onrender.com/api/login/login': 'https://saucy-chef-backend.onrender.com/api/signup/register';
       console.log(endpoint)
       // Both login and signup only need email and password
       const dataToSend = { 

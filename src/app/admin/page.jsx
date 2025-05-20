@@ -21,7 +21,7 @@ export default function AdminPage() {
 
   const loadMeals = async () => {
     try {
-      const res = await fetch('http://localhost:4000/api/create-recipe/all-recipes');
+      const res = await fetch('https://saucy-chef-backend.onrender.com/api/create-recipe/all-recipes');
       const data = await res.json();
       setMeals(data); 
     } catch (err) {
@@ -50,7 +50,7 @@ export default function AdminPage() {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch('http://localhost:4000/api/users/get-all', {
+      const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/get-all', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ adminPassword: correctPassword}),
@@ -72,7 +72,7 @@ export default function AdminPage() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch('http://localhost:4000/api/users/delete', {
+      const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/delete', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -99,7 +99,7 @@ export default function AdminPage() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch('http://localhost:4000/api/create-recipe/delete', {
+      const res = await fetch('https://saucy-chef-backend.onrender.com/api/create-recipe/delete', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

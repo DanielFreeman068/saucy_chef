@@ -29,7 +29,7 @@ const ExplorePage = () => {
 
         const fetchFavorites = async () => {
             try {
-                const res = await fetch('http://localhost:4000/api/users/favorites', {
+                const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/favorites', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

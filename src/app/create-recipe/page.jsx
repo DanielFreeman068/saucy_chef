@@ -47,7 +47,7 @@ const CreationPage = () => {
                 formData.append('image', file);
 
                 try {
-                const res = await fetch('http://localhost:4000/api/upload', {
+                const res = await fetch('https://saucy-chef-backend.onrender.com/api/upload', {
                     method: 'POST',
                     body: formData,
                 });
@@ -119,7 +119,7 @@ const CreationPage = () => {
             }
 
             try {
-                const response = await fetch('http://localhost:4000/api/create-recipe', {
+                const response = await fetch('https://saucy-chef-backend.onrender.com/api/create-recipe', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

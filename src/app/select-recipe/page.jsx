@@ -46,7 +46,7 @@ export default function SelectRecipe() {
 
         const fetchMealPlan = async () => {
         try {
-            const res = await fetch('http://localhost:4000/api/users/meal-plan', {
+            const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/meal-plan', {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -68,7 +68,7 @@ export default function SelectRecipe() {
 
         const fetchFavorites = async () => {
             try {
-                const res = await fetch('http://localhost:4000/api/users/favorites', {
+                const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/favorites', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -98,7 +98,7 @@ export default function SelectRecipe() {
         const updatedMealPlan = { ...mealPlan, [key]: recipe };
 
         try {
-            const res = await fetch('http://localhost:4000/api/users/meal-plan', {
+            const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/meal-plan', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

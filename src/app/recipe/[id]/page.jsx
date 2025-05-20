@@ -28,7 +28,7 @@ export default function RecipeCard() {
                 const token = localStorage.getItem('token');
                 if (!token) return;
 
-                const res = await fetch('http://localhost:4000/api/users/favorites', {
+                const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/favorites', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -53,7 +53,7 @@ const handleToggleFavorite = async () => {
     setLoading(true);
 
     try {
-        const res = await fetch('http://localhost:4000/api/users/favorites', {
+        const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/favorites', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

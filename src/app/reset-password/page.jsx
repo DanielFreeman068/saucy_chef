@@ -22,7 +22,7 @@ export default function VerifyResetCodePage() {
 
         try {
             // Step 1: Verify code
-            const verifyRes = await fetch('http://localhost:4000/api/auth/verify-reset-code', {
+            const verifyRes = await fetch('https://saucy-chef-backend.onrender.com/api/auth/verify-reset-code', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, code }),
@@ -35,7 +35,7 @@ export default function VerifyResetCodePage() {
             }
 
             // Step 2: Reset password
-            const resetRes = await fetch('http://localhost:4000/api/auth/reset-password', {
+            const resetRes = await fetch('https://saucy-chef-backend.onrender.com/api/auth/reset-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, code, password }),
