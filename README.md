@@ -7,7 +7,7 @@
 
 ## 📸 Preview
 
-![Portfolio Preview](/public/siteImage.png)  
+![Portfolio Preview](/public/uploads/siteImage.png)  
 
 ---
 
