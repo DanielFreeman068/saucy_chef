@@ -26,6 +26,10 @@ app.use('/api/upload', require('./routes/imageRoutes'));
 app.use('/api/create-recipe', require('./routes/recipeRoutes'));
 app.use('/api/auth', require('./routes/auth.js'));
 
+app.get("/", (req, res) => {
+    res.send("Hello from the backend!");
+});
+
 const initServer = async () => {
     try {
         await connectDB(process.env.MONGO_URI);
