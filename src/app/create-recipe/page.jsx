@@ -46,7 +46,6 @@ const CreationPage = () => {
             if (!file) return;
             
             setIsUploading(true);
-            setUploadError(null); // Clear previous errors
             
             try {
             // Validate file size and type before sending
@@ -66,6 +65,12 @@ const CreationPage = () => {
                 method: 'POST',
                 body: formData,
             });
+            
+            if (response.status === 400) {
+                const errorData = await response.json().catch(() => ({ error: "Could not parse error response" }));
+                console.log("Error response body:", errorData);
+                throw new Error(errorData.error || "Bad request - The server rejected the upload");
+            }
             
             // Handle HTTP errors
             if (!response.ok) {
@@ -87,7 +92,6 @@ const CreationPage = () => {
             
             } catch (error) {
             console.error('Upload failed:', error);
-            setUploadError(error.message || "Failed to upload image");
             } finally {
             setIsUploading(false);
             }
