@@ -45,38 +45,53 @@ const CreationPage = () => {
             const file = e.target.files[0];
             if (!file) return;
             
-            // Optional: show loading state
             setIsUploading(true);
+            setUploadError(null); // Clear previous errors
             
             try {
-                // Create form data
-                const formData = new FormData();
-                formData.append('image', file);
-                
-                const response = await fetch('https://saucy-chef-backend.onrender.com/api/upload', {
-                    method: 'POST',
-                    body: formData,
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`Upload failed with status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                setRecipe(prev => ({
-                    ...prev,
-                    Image: data.imageUrl, 
-                }));
-                
-                console.log('Image uploaded successfully!');
-                
-                } catch (error) {
-                console.error('Upload failed:', error);
-                } finally {
-                setIsUploading(false);
-                }
-            };
+            // Validate file size and type before sending
+            if (file.size > 5 * 1024 * 1024) {
+                throw new Error("File too large (max 5MB)");
+            }
+            
+            const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
+            if (!validTypes.includes(file.type)) {
+                throw new Error("Invalid file type. Please use JPG, PNG, or GIF");
+            }
+            
+            const formData = new FormData();
+            formData.append('image', file);
+            
+            const response = await fetch('https://saucy-chef-backend.onrender.com/api/upload', {
+                method: 'POST',
+                body: formData,
+            });
+            
+            // Handle HTTP errors
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.error || `Upload failed with status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // Add some validation on the returned data
+            if (!data.imageUrl) {
+                throw new Error("Server returned an invalid response");
+            }
+            
+            setRecipe(prev => ({
+                ...prev,
+                Image: data.imageUrl,
+            }));
+            
+            } catch (error) {
+            console.error('Upload failed:', error);
+            setUploadError(error.message || "Failed to upload image");
+            } finally {
+            setIsUploading(false);
+            }
+        };
 
         // Handle ingredient changes
         const handleIngredientChange = (index, field, value) => {
@@ -314,32 +329,30 @@ const CreationPage = () => {
                             <Camera size={48} className="text-[#af554b]" />
                             )}
                             
+                            
                         </div>
                         <button
                             type="button"
                             onClick={() => document.getElementById('imageUpload').click()}
-                            className="w-full sm:w-auto px-4 py-2 bg-[#B53325] text-white text-sm rounded hover:bg-[#953306] disabled:opacity-50"
-                            disabled={isUploading}
-                            >
-                            {isUploading ? 'Uploading...' : 'Upload Image'}
-                            </button>
+                            className="w-full sm:w-auto mb-2 px-4 py-2 bg-[#B53325] text-white text-sm rounded hover:bg-[#953306]"
+                        >
+                            Upload Image
+                        </button>
                         <input
                             type="file"
                             id="imageUpload"
                             accept="image/*"
                             onChange={handleFileUpload}
                             className="hidden"
-                            disabled={isUploading}
-                            />
+                        />
                         <input
-                            type="text"
-                            id="Image"
-                            name="Image"
-                            value={recipe.Image}
-                            onChange={handleChange}
-                            placeholder="Or enter image URL"
-                            className="placeholder-[#953306ad] w-full p-2 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325] text-sm"
-                            disabled={isUploading}
+                        type="text"
+                        id="Image"
+                        name="Image"
+                        value={recipe.Image}
+                        onChange={handleChange}
+                        placeholder="Or enter image URL"
+                        className="placeholder-[#953306ad] w-full p-2 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325] text-sm"
                         />
                     </div>
                     </div>
