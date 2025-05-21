@@ -84,3 +84,65 @@
 - nodemailer `^7.0.3`
 - nodemon `^3.1.10`
 - path `^0.12.7`
+
+# 📦 Installation
+
+### Clone the repository
+
+```bash
+git clone https://github.com/YourUsername/saucy-chef.git
+cd saucy-chef
+```
+
+### Install root dependencies
+
+```bash
+npm install
+```
+
+### Install backend dependencies
+
+```bash
+cd backend
+npm install
+cd ..
+```
+
+### Create a `.env` file in the backend directory
+
+```env
+MONGO_URI="your mongodb database"
+JWT_SECRET="mysecretkey1234"
+EMAIL_USER = "your email"
+EMAIL_PASS = "your email password"
+CLIENT_URL=http://localhost:3000
+ADMIN_PASSWORD=123
+```
+
+### Run both frontend and backend (in separate terminals or with concurrently)
+
+```bash
+npm run dev     # Frontend
+npm run backend # Backend
+```
+
+### Navigate to
+
+```
+http://localhost:3000
+```
+
+# 🧪 Testing
+
+To be added – testing instructions or link to documentation.
+
+# ✍️ Authors
+
+- DanielFreeman068  
+- sshafe928  
+- oakuopus
+
+# 📄 License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
