@@ -88,11 +88,11 @@ export default function AuthPage() {
         <div className={`absolute top-1 left-1 w-[calc(63%-2.9rem)] h-[calc(100%-0.5rem)] bg-white rounded-sm transition-all duration-300 ease-in-out ${ !isLogin ? 'translate-x-full' : '' }`} />
 
         {/* Buttons */}
-        <button onClick={() => setIsLogin(true)} className={`z-10 flex-1 py-2 px-2 text-center font-medium rounded-sm transition-colors ${ isLogin ? 'text-[#7F0B04]' : 'text-gray-500' }`} >
+        <button onClick={() => setIsLogin(true)} className={`z-10 flex-1 py-2 cursor-pointer px-2 text-center font-medium rounded-sm transition-colors ${ isLogin ? 'text-[#7F0B04]' : 'text-gray-500' }`} >
           Login
         </button>
 
-        <button onClick={() => setIsLogin(false)} className={`z-10 flex-1 py-2 px-2 text-center font-medium rounded-sm transition-colors ${ !isLogin ? 'text-[#7F0B04]' : 'text-gray-500' }`} >
+        <button onClick={() => setIsLogin(false)} className={`z-10 flex-1 py-2 px-2 cursor-pointer text-center font-medium rounded-sm transition-colors ${ !isLogin ? 'text-[#7F0B04]' : 'text-gray-500' }`} >
           Sign Up
         </button>
       </div>
@@ -128,7 +128,7 @@ export default function AuthPage() {
 
           {error && <p className="text-red-500 mb-4">{error}</p>}
 
-          <button type="submit" className="w-full p-2 mt-6 bg-[#7F0B04] hover:bg-[#a1312b] text-white rounded-sm transition" >
+          <button type="submit" className="w-full p-2 mt-6 bg-[#7F0B04] hover:bg-[#a1312b] cursor-pointer text-white rounded-sm transition" >
             {isLogin ? 'Login' : 'Sign Up'}
           </button>
 

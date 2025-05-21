@@ -175,7 +175,7 @@ const CreationPage = () => {
                 <header className="flex flex-col sm:flex-row items-center justify-between mb-6 border-b-2 border-amber-800 pb-4 gap-4">
                 <div className="flex items-center">
                     <a href="/explore">
-                    <button className="text-amber-800 mr-4 hover:text-amber-700">
+                    <button className="text-amber-800 cursor-pointer mr-4 hover:text-amber-700">
                     <ChevronLeft size={28} />
                     </button>
                     </a>
@@ -184,7 +184,7 @@ const CreationPage = () => {
                 <button
                     type="button"
                     onClick={handleSubmit}
-                    className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-[#B53325] text-white rounded-md shadow-md hover:bg-[#912b20] transition-colors flex items-center justify-center"
+                    className="w-full cursor-pointer sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-[#B53325] text-white rounded-md shadow-md hover:bg-[#912b20] transition-colors flex items-center justify-center"
                 >
                     <Save size={18} className="mr-2" />
                     Save Recipe
@@ -218,14 +218,24 @@ const CreationPage = () => {
                             name="Category"
                             value={recipe.Category}
                             onChange={handleChange}
-                            className="text-[#953306ad] w-full p-2 sm:p-3 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
+                            className="text-[#953306ad] cursor-pointer w-full p-2 sm:p-3 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
                             >
                             <option value="">Select Category</option>
                             <option value="Appetizer">Appetizer</option>
                             <option value="Main Course">Main Course</option>
                             <option value="Dessert">Dessert</option>
-                            <option value="Side Dish">Side</option>
-                            <option value="Starter">Starter</option>
+                            <option value="Side Dish">Side Dish</option>
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Snack">Snack</option>
+                            <option value="Soup">Soup</option>
+                            <option value="Salad">Salad</option>
+                            <option value="High Protein">High Protein</option>
+                            <option value="Low Carb">Low Carb</option>
+                            <option value="Vegan">Vegan</option>
+                            <option value="Vegetarian">Vegetarian</option>
+                            <option value="Gluten-Free">Gluten-Free</option>
+                            <option value="Comfort Food">Comfort Food</option>
+                            <option value="Street Food">Street Food</option>
                             </select>
                         </div>
                         
@@ -236,31 +246,79 @@ const CreationPage = () => {
                             name="Area"
                             value={recipe.Area}
                             onChange={handleChange}
-                            className="text-[#953306ad] w-full p-2 sm:p-3 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
+                            className="text-[#953306ad] w-full cursor-pointer p-2 sm:p-3 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
                             >
                             <option value="">Select Cuisine</option>
+                            <option value="Afghan">Afghan</option>
+                            <option value="Algerian">Algerian</option>
                             <option value="American">American</option>
+                            <option value="Argentinian">Argentinian</option>
+                            <option value="Austrian">Austrian</option>
+                            <option value="Bangladeshi">Bangladeshi</option>
+                            <option value="Belgian">Belgian</option>
+                            <option value="Brazilian">Brazilian</option>
                             <option value="British">British</option>
+                            <option value="Burmese">Burmese</option>
+                            <option value="Cajun">Cajun</option>
                             <option value="Canadian">Canadian</option>
+                            <option value="Chechen">Chechen</option>
+                            <option value="Chilean">Chilean</option>
                             <option value="Chinese">Chinese</option>
+                            <option value="Colombian">Colombian</option>
                             <option value="Croatian">Croatian</option>
+                            <option value="Cuban">Cuban</option>
                             <option value="Dutch">Dutch</option>
                             <option value="Egyptian">Egyptian</option>
+                            <option value="Ethiopian">Ethiopian</option>
+                            <option value="Filipino">Filipino</option>
                             <option value="French">French</option>
+                            <option value="Georgian">Georgian</option>
+                            <option value="German">German</option>
+                            <option value="Ghanaian">Ghanaian</option>
                             <option value="Greek">Greek</option>
+                            <option value="Haitian">Haitian</option>
+                            <option value="Hawaiian">Hawaiian</option>
+                            <option value="Hungarian">Hungarian</option>
                             <option value="Indian">Indian</option>
+                            <option value="Indonesian">Indonesian</option>
+                            <option value="Iranian">Iranian</option>
                             <option value="Irish">Irish</option>
                             <option value="Italian">Italian</option>
                             <option value="Jamaican">Jamaican</option>
                             <option value="Japanese">Japanese</option>
+                            <option value="Kazakh">Kazakh</option>
+                            <option value="Kenyan">Kenyan</option>
+                            <option value="Korean">Korean</option>
+                            <option value="Laotian">Laotian</option>
+                            <option value="Lebanese">Lebanese</option>
                             <option value="Malaysian">Malaysian</option>
                             <option value="Mexican">Mexican</option>
+                            <option value="Mongolian">Mongolian</option>
                             <option value="Moroccan">Moroccan</option>
+                            <option value="Nepali">Nepali</option>
+                            <option value="Nigerian">Nigerian</option>
+                            <option value="Pakistani">Pakistani</option>
+                            <option value="Palestinian">Palestinian</option>
+                            <option value="Peruvian">Peruvian</option>
                             <option value="Polish">Polish</option>
+                            <option value="Portuguese">Portuguese</option>
+                            <option value="Romanian">Romanian</option>
                             <option value="Russian">Russian</option>
+                            <option value="Serbian">Serbian</option>
+                            <option value="Singaporean">Singaporean</option>
+                            <option value="South African">South African</option>
                             <option value="Spanish">Spanish</option>
+                            <option value="Sri Lankan">Sri Lankan</option>
+                            <option value="Swedish">Swedish</option>
+                            <option value="Syrian">Syrian</option>
+                            <option value="Thai">Thai</option>
+                            <option value="Tibetan">Tibetan</option>
                             <option value="Tunisian">Tunisian</option>
+                            <option value="Turkish">Turkish</option>
+                            <option value="Ukrainian">Ukrainian</option>
                             <option value="Uruguayan">Uruguayan</option>
+                            <option value="Uzbek">Uzbek</option>
+                            <option value="Venezuelan">Venezuelan</option>
                             <option value="Vietnamese">Vietnamese</option>
                             <option value="Unknown">Other</option>
                             </select>
@@ -351,7 +409,7 @@ const CreationPage = () => {
                         <button
                         type="button"
                         onClick={addIngredient}
-                        className="flex items-center px-2 sm:px-3 py-1 bg-[#B53325] text-white rounded-md hover:bg-[#912b20] transition-colors"
+                        className="flex items-center cursor-pointer px-2 sm:px-3 py-1 bg-[#B53325] text-white rounded-md hover:bg-[#912b20] transition-colors"
                         >
                         <Plus size={16} className="mr-1" />
                         Add
@@ -384,7 +442,7 @@ const CreationPage = () => {
                             <button
                             type="button"
                             onClick={() => removeIngredient(index)}
-                            className="p-1 text-amber-700 hover:text-red-600 transition-colors"
+                            className="p-1 text-amber-700 cursor-pointer hover:text-red-600 transition-colors"
                             disabled={recipe.ingredients.length === 1}
                             >
                             <Trash2 size={16} />

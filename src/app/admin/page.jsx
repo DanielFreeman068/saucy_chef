@@ -148,8 +148,8 @@ export default function AdminPage() {
             {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
             {/* Submit Button */}
-            <button type="submit" className="w-full py-2 mb-4 bg-[#B53325] text-white rounded hover:bg-[#792319] transition" > Unlock </button>
-            <Link href="/explore"><button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition" > Back </button></Link>
+            <button type="submit" className="w-full py-2 mb-4 bg-[#B53325] text-white rounded hover:bg-[#792319] transition cursor-pointer" > Unlock </button>
+            <Link href="/explore"><button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition cursor-pointer" > Back </button></Link>
           </form>
         </div>
       )}
