@@ -7,8 +7,6 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer.jsx';
 import DishCard from "../components/DishCard.jsx";
 
-import meals from '../../../backend/data/recipes.json';
-
 const ExplorePage = () => {
     const router = useRouter();
 
@@ -18,7 +16,7 @@ const ExplorePage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchText, setSearchText] = useState('');
 
-    const categories = ['All', 'Favorites', ...new Set(meals.map(meal => meal.Category))];
+    const [meals, setMeals] = useState([]);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -27,31 +25,37 @@ const ExplorePage = () => {
             return;
         }
 
-        const fetchFavorites = async () => {
+        const fetchData = async () => {
             try {
-                const res = await fetch('https://saucy-chef-backend.onrender.com/api/users/favorites', {
+                // Fetch all meals
+                const mealRes = await fetch('https://saucy-chef-backend.onrender.com/api/create-recipe/all-recipes');
+                const mealData = await mealRes.json();
+                setMeals(mealData);
+
+                // Then fetch favorites
+                const favRes = await fetch('https://saucy-chef-backend.onrender.com/api/users/favorites', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
-                if (!res.ok) throw new Error('Failed to fetch favorites');
+                if (!favRes.ok) throw new Error('Failed to fetch favorites');
+                const favData = await favRes.json();
 
-                const data = await res.json();
-
-                const favMeals = meals.filter(meal => data.favs.includes(meal.idMeal.toString()));
+                const favMeals = mealData.filter(meal => favData.favs.includes(meal.idMeal.toString()));
                 setFavorites(favMeals);
             } catch (error) {
-                console.error('Error fetching favorites:', error);
+                console.error('Error fetching data:', error);
             } finally {
                 setLoadingFavorites(false);
             }
         };
 
-        fetchFavorites();
+        fetchData();
     }, [router]);
 
-    // Filtering logic by category n search query
+    const categories = ['All', 'Favorites', ...new Set(meals.map(meal => meal.Category))];
+
     const baseMeals =
         selectedCategory === 'Favorites'
             ? favorites
@@ -97,7 +101,7 @@ const ExplorePage = () => {
                             }`}
                             onClick={() => {
                                 setSelectedCategory(category);
-                                setSearchQuery(''); // clear search on category switch
+                                setSearchQuery('');
                                 setSearchText('');
                             }}
                         >

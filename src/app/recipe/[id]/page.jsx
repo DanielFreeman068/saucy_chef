@@ -2,7 +2,6 @@
 
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import meals from '../../../../backend/data/recipes.json';
 import Link from 'next/link';
 import { IoMdClose } from "react-icons/io";
 import { CgBowl } from "react-icons/cg";
@@ -17,10 +16,26 @@ export default function RecipeCard() {
     const [favoriteIds, setFavoriteIds] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const [meals, setMeals] = useState([]);
+
+    const loadMeals = async () => {
+    try {
+        const res = await fetch('https://saucy-chef-backend.onrender.com/api/create-recipe/all-recipes');
+        const data = await res.json();
+        setMeals(data); 
+    } catch (err) {
+        console.error('Failed to load meals:', err);
+    }
+    };
+
+    useEffect(() => {
+        loadMeals();
+    }, []);
+
     useEffect(() => {
         const foundMeal = meals.find((dish) => dish.idMeal === id);
         setMeal(foundMeal);
-    }, [id]);
+    }, [id, meals]);
 
     useEffect(() => {
         const fetchFavorites = async () => {
