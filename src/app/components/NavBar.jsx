@@ -4,6 +4,7 @@
     import { Menu } from 'lucide-react';
     import Image from "next/image";
     import Link from 'next/link';
+import { urlToUrlWithoutFlightMarker } from 'next/dist/client/components/router-reducer/fetch-server-response';
 
 
     export default function Navbar({ page }) {
@@ -64,7 +65,7 @@
                 // Hamburger menu icon (Menu from lucide-react)
                 <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 text-[#6e2604] hover:text-[#53230c]"
+                className="p-2 cursor-pointer text-[#6e2604] hover:text-[#53230c]"
                 >
                 <Menu size={46} />
                 </button>
@@ -73,12 +74,12 @@
             {/* === Dropdown Menu === */}
             {isOpen && (
                 <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg z-10 overflow-hidden">
-                <div className="py-1">
+                <div>
                     <a href="/explore" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Explore Recipes</a>
                     <a href="/create-recipe" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create Recipe</a>
                     <a href="/meal-planner" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Week</a>
                     <a href="/admin" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Admin Login</a>
-                    <button onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
+                    <button onClick={handleLogout} className="block w-full text-left cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
                 </div>
                 </div>
             )}
@@ -91,13 +92,17 @@
 
             {/* === Right: Logo === */}
             <div className="flex items-center space-x-3">
-            <Image
-                src="/saucy_chef_logo2.png"
-                alt="Saucy Chef Logo"
-                width={100}
-                height={100}
-                className="w-[50px] md:w-[60px] lg:w-[80px]"
-            />
+            <Link
+                href="/explore"
+            >
+                <Image
+                    src="/saucy_chef_logo2.png"
+                    alt="Saucy Chef Logo"
+                    width={100}
+                    height={100}
+                    className="w-[50px] md:w-[60px] lg:w-[80px] cursor-pointer"
+                />
+            </Link>
             </div>
         </div>
         </div>

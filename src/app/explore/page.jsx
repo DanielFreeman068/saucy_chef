@@ -83,7 +83,7 @@ const ExplorePage = () => {
                     />
                     <button
                         onClick={() => setSearchQuery(searchText)}
-                        className="bg-[#953306] text-white px-4 py-2 rounded-lg shadow hover:bg-[#7a2802]"
+                        className="bg-[#953306] cursor-pointer text-white px-4 py-2 rounded-lg shadow hover:bg-[#7a2802]"
                     >
                         Search
                     </button>
@@ -94,7 +94,7 @@ const ExplorePage = () => {
                     {categories.map((category) => (
                         <button
                             key={category}
-                            className={`px-4 py-2 rounded-full shadow ${
+                            className={`px-4 py-2 cursor-pointer rounded-full shadow ${
                                 selectedCategory === category
                                     ? 'bg-[#953306] text-white'
                                     : 'bg-[#F4E2CE] text-[#953306]'
