@@ -11,6 +11,7 @@ import { ChevronLeft, Plus, Trash2, Save, Camera } from 'lucide-react';
 const CreationPage = () => {
     const router = useRouter();
     const [showSuccess, setShowSuccess] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
     
         useEffect(() => {
             const token = localStorage.getItem('token');
@@ -42,25 +43,39 @@ const CreationPage = () => {
         
         const handleFileUpload = async (e) => {
             const file = e.target.files[0];
-            if (file) {
+            if (!file) return;
+            
+            // Optional: show loading state
+            setIsUploading(true);
+            
+            try {
+                // Create form data
                 const formData = new FormData();
                 formData.append('image', file);
-
-                try {
-                const res = await fetch('https://saucy-chef-backend.onrender.com/api/upload', {
+                
+                const response = await fetch('https://saucy-chef-backend.onrender.com/api/upload', {
                     method: 'POST',
                     body: formData,
                 });
-
-                const data = await res.json();
+                
+                if (!response.ok) {
+                    throw new Error(`Upload failed with status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
                 setRecipe(prev => ({
                     ...prev,
-                    Image: data.imageUrl, // e.g., /uploads/filename.jpg
+                    Image: data.imageUrl, 
                 }));
-                } catch (err) {
-                console.error('Upload failed:', err);
+                
+                console.log('Image uploaded successfully!');
+                
+                } catch (error) {
+                console.error('Upload failed:', error);
+                } finally {
+                setIsUploading(false);
                 }
-            }
             };
 
         // Handle ingredient changes
@@ -291,36 +306,40 @@ const CreationPage = () => {
                         <div className="w-full h-48 sm:h-64 bg-[#E38B82] rounded-md flex items-center justify-center mb-4">
                         {recipe.Image ? (
                             <img 
-                            src={recipe.Image} 
-                            alt="Recipe thumbnail" 
-                            className="w-full h-full object-cover rounded-md"
+                                src={recipe.Image} 
+                                alt="Recipe thumbnail" 
+                                className="w-full h-full object-cover rounded-md"
                             />
-                        ) : (
+                            ) : (
                             <Camera size={48} className="text-[#af554b]" />
-                        )}
+                            )}
+                            
                         </div>
                         <button
                             type="button"
                             onClick={() => document.getElementById('imageUpload').click()}
-                            className="w-full sm:w-auto mb-2 px-4 py-2 bg-[#B53325] text-white text-sm rounded hover:bg-[#953306]"
-                        >
-                            Upload Image
-                        </button>
+                            className="w-full sm:w-auto px-4 py-2 bg-[#B53325] text-white text-sm rounded hover:bg-[#953306] disabled:opacity-50"
+                            disabled={isUploading}
+                            >
+                            {isUploading ? 'Uploading...' : 'Upload Image'}
+                            </button>
                         <input
                             type="file"
                             id="imageUpload"
                             accept="image/*"
                             onChange={handleFileUpload}
                             className="hidden"
-                        />
+                            disabled={isUploading}
+                            />
                         <input
-                        type="text"
-                        id="Image"
-                        name="Image"
-                        value={recipe.Image}
-                        onChange={handleChange}
-                        placeholder="Or enter image URL"
-                        className="placeholder-[#953306ad] w-full p-2 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325] text-sm"
+                            type="text"
+                            id="Image"
+                            name="Image"
+                            value={recipe.Image}
+                            onChange={handleChange}
+                            placeholder="Or enter image URL"
+                            className="placeholder-[#953306ad] w-full p-2 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325] text-sm"
+                            disabled={isUploading}
                         />
                     </div>
                     </div>
