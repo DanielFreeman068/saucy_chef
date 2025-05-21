@@ -2,7 +2,8 @@
 
 **Saucy Chef** is a full-stack web application that allows users to explore a wide variety of recipes, craft custom weekly meal plans, and export ingredients into a downloadable Excel spreadsheet. It also includes an admin dashboard for managing users and recipe content.
 
-**Saucy Chef** on Render https://saucy-chef.onrender.com/
+**Saucy Chef** on Render 
+https://saucy-chef.onrender.com/
 ---
 
 ## 📸 Preview
