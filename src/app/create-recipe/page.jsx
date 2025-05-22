@@ -217,17 +217,7 @@ const CreationPage = () => {
                             <option value="Main Course">Main Course</option>
                             <option value="Dessert">Dessert</option>
                             <option value="Side Dish">Side Dish</option>
-                            <option value="Breakfast">Breakfast</option>
-                            <option value="Snack">Snack</option>
-                            <option value="Soup">Soup</option>
-                            <option value="Salad">Salad</option>
-                            <option value="High Protein">High Protein</option>
-                            <option value="Low Carb">Low Carb</option>
-                            <option value="Vegan">Vegan</option>
-                            <option value="Vegetarian">Vegetarian</option>
-                            <option value="Gluten-Free">Gluten-Free</option>
-                            <option value="Comfort Food">Comfort Food</option>
-                            <option value="Street Food">Street Food</option>
+                            <option value="Starter">Starter</option>
                             </select>
                         </div>
                         
@@ -241,78 +231,75 @@ const CreationPage = () => {
                             className="text-[#953306ad] w-full cursor-pointer p-2 sm:p-3 border-2 border-[#DFBC94] rounded-md bg-[#f7eadb] focus:outline-none focus:ring-2 focus:ring-[#B53325]"
                             >
                             <option value="">Select Cuisine</option>
-                            <option value="Afghan">Afghan</option>
-                            <option value="Algerian">Algerian</option>
-                            <option value="American">American</option>
-                            <option value="Argentinian">Argentinian</option>
-                            <option value="Austrian">Austrian</option>
-                            <option value="Bangladeshi">Bangladeshi</option>
-                            <option value="Belgian">Belgian</option>
-                            <option value="Brazilian">Brazilian</option>
-                            <option value="British">British</option>
-                            <option value="Burmese">Burmese</option>
-                            <option value="Cajun">Cajun</option>
-                            <option value="Canadian">Canadian</option>
-                            <option value="Chechen">Chechen</option>
-                            <option value="Chilean">Chilean</option>
+                            <optgroup label="Asian">
                             <option value="Chinese">Chinese</option>
-                            <option value="Colombian">Colombian</option>
-                            <option value="Croatian">Croatian</option>
-                            <option value="Cuban">Cuban</option>
+                            <option value="Indian">Indian</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Korean">Korean</option>
+                            <option value="Thai">Thai</option>
+                            <option value="Vietnamese">Vietnamese</option>
+                            <option value="Filipino">Filipino</option>
+                            <option value="Indonesian">Indonesian</option>
+                            <option value="Malaysian">Malaysian</option>
+                            <option value="Pakistani">Pakistani</option>
+                            </optgroup>
+
+                            <optgroup label="European">
+                            <option value="British">British</option>
+                            <option value="French">French</option>
+                            <option value="Italian">Italian</option>
+                            <option value="Spanish">Spanish</option>
+                            <option value="German">German</option>
+                            <option value="Greek">Greek</option>
+                            <option value="Polish">Polish</option>
+                            <option value="Russian">Russian</option>
+                            <option value="Hungarian">Hungarian</option>
                             <option value="Dutch">Dutch</option>
+                            </optgroup>
+
+                            <optgroup label="Middle Eastern & Central Asian">
+                            <option value="Turkish">Turkish</option>
+                            <option value="Iranian">Iranian</option>
+                            <option value="Lebanese">Lebanese</option>
+                            <option value="Syrian">Syrian</option>
+                            <option value="Georgian">Georgian</option>
+                            <option value="Kazakh">Kazakh</option>
+                            <option value="Uzbek">Uzbek</option>
+                            <option value="Palestinian">Palestinian</option>
+                            </optgroup>
+
+                            <optgroup label="African">
+                            <option value="Moroccan">Moroccan</option>
                             <option value="Egyptian">Egyptian</option>
                             <option value="Ethiopian">Ethiopian</option>
-                            <option value="Filipino">Filipino</option>
-                            <option value="French">French</option>
-                            <option value="Georgian">Georgian</option>
-                            <option value="German">German</option>
-                            <option value="Ghanaian">Ghanaian</option>
-                            <option value="Greek">Greek</option>
-                            <option value="Haitian">Haitian</option>
-                            <option value="Hawaiian">Hawaiian</option>
-                            <option value="Hungarian">Hungarian</option>
-                            <option value="Indian">Indian</option>
-                            <option value="Indonesian">Indonesian</option>
-                            <option value="Iranian">Iranian</option>
-                            <option value="Irish">Irish</option>
-                            <option value="Italian">Italian</option>
-                            <option value="Jamaican">Jamaican</option>
-                            <option value="Japanese">Japanese</option>
-                            <option value="Kazakh">Kazakh</option>
-                            <option value="Kenyan">Kenyan</option>
-                            <option value="Korean">Korean</option>
-                            <option value="Laotian">Laotian</option>
-                            <option value="Lebanese">Lebanese</option>
-                            <option value="Malaysian">Malaysian</option>
-                            <option value="Mexican">Mexican</option>
-                            <option value="Mongolian">Mongolian</option>
-                            <option value="Moroccan">Moroccan</option>
-                            <option value="Nepali">Nepali</option>
                             <option value="Nigerian">Nigerian</option>
-                            <option value="Pakistani">Pakistani</option>
-                            <option value="Palestinian">Palestinian</option>
-                            <option value="Peruvian">Peruvian</option>
-                            <option value="Polish">Polish</option>
-                            <option value="Portuguese">Portuguese</option>
-                            <option value="Romanian">Romanian</option>
-                            <option value="Russian">Russian</option>
-                            <option value="Serbian">Serbian</option>
-                            <option value="Singaporean">Singaporean</option>
                             <option value="South African">South African</option>
-                            <option value="Spanish">Spanish</option>
-                            <option value="Sri Lankan">Sri Lankan</option>
-                            <option value="Swedish">Swedish</option>
-                            <option value="Syrian">Syrian</option>
-                            <option value="Thai">Thai</option>
-                            <option value="Tibetan">Tibetan</option>
                             <option value="Tunisian">Tunisian</option>
-                            <option value="Turkish">Turkish</option>
-                            <option value="Ukrainian">Ukrainian</option>
-                            <option value="Uruguayan">Uruguayan</option>
-                            <option value="Uzbek">Uzbek</option>
-                            <option value="Venezuelan">Venezuelan</option>
-                            <option value="Vietnamese">Vietnamese</option>
+                            <option value="Algerian">Algerian</option>
+                            <option value="Ghanaian">Ghanaian</option>
+                            </optgroup>
+
+                            <optgroup label="Americas">
+                            <option value="American">American</option>
+                            <option value="Mexican">Mexican</option>
+                            <option value="Brazilian">Brazilian</option>
+                            <option value="Argentinian">Argentinian</option>
+                            <option value="Colombian">Colombian</option>
+                            <option value="Canadian">Canadian</option>
+                            <option value="Jamaican">Jamaican</option>
+                            <option value="Cuban">Cuban</option>
+                            </optgroup>
+
+                            <optgroup label="Other / Unique">
+                            <option value="Hawaiian">Hawaiian</option>
+                            <option value="Cajun">Cajun</option>
+                            <option value="Sri Lankan">Sri Lankan</option>
+                            <option value="Afghan">Afghan</option>
+                            <option value="Bangladeshi">Bangladeshi</option>
+                            <option value="Nepali">Nepali</option>
+                            <option value="Tibetan">Tibetan</option>
                             <option value="Unknown">Other</option>
+                            </optgroup>
                             </select>
                         </div>
                         </div>
