@@ -44,58 +44,31 @@ const CreationPage = () => {
         const handleFileUpload = async (e) => {
             const file = e.target.files[0];
             if (!file) return;
-            
-            setIsUploading(true);
-            
-            try {
-            // Validate file size and type before sending
-            if (file.size > 5 * 1024 * 1024) {
-                throw new Error("File too large (max 5MB)");
-            }
-            
-            const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
-            if (!validTypes.includes(file.type)) {
-                throw new Error("Invalid file type. Please use JPG, PNG, or GIF");
-            }
-            
+
             const formData = new FormData();
-            formData.append('image', file);
-            
-            const response = await fetch('https://saucy-chef-backend.onrender.com/api/upload', {
-                method: 'POST',
+            formData.append("file", file);
+            formData.append("upload_preset", "my_unsigned_preset");
+
+            try {
+                const res = await fetch(`https://api.cloudinary.com/v1_1/dafmz44zh/image/upload`, {
+                method: "POST",
                 body: formData,
-            });
-            
-            if (response.status === 400) {
-                const errorData = await response.json().catch(() => ({ error: "Could not parse error response" }));
-                console.log("Error response body:", errorData);
-                throw new Error(errorData.error || "Bad request - The server rejected the upload");
+                });
+
+                const data = await res.json();
+
+                if (data.secure_url) {
+                setRecipe((prev) => ({
+                    ...prev,
+                    Image: data.secure_url,
+                }));
+                } else {
+                console.error("No secure_url in Cloudinary response", data);
+                }
+            } catch (err) {
+                console.error("Upload error:", err);
             }
-            
-            // Handle HTTP errors
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.error || `Upload failed with status: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            
-            // Add some validation on the returned data
-            if (!data.imageUrl) {
-                throw new Error("Server returned an invalid response");
-            }
-            
-            setRecipe(prev => ({
-                ...prev,
-                Image: data.imageUrl,
-            }));
-            
-            } catch (error) {
-            console.error('Upload failed:', error);
-            } finally {
-            setIsUploading(false);
-            }
-        };
+            };
 
         // Handle ingredient changes
         const handleIngredientChange = (index, field, value) => {

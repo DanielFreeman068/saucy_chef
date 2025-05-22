@@ -22,7 +22,6 @@ app.use(express.urlencoded({extended : false}));
 app.use('/api/login', require('./routes/userRoutes'));
 app.use('/api/signup', require('./routes/userRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
-app.use('/api/upload', require('./routes/imageRoutes'));
 app.use('/api/create-recipe', require('./routes/recipeRoutes'));
 app.use('/api/auth', require('./routes/auth.js'));
 
